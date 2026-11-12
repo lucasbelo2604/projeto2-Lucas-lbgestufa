@@ -26,7 +26,9 @@ A ponte recebe do broker público as medidas e respostas de comando do grupo e e
 ```text
 projeto2-Lucas-lbgestufa/
 ├── README.md
-├── firmware/main.py
+├── firmware/
+│   ├── main.py
+│   └── diagram.json
 ├── plataforma/
 │   ├── docker-compose.yml
 │   ├── mosquitto/mosquitto.conf
@@ -37,7 +39,7 @@ projeto2-Lucas-lbgestufa/
 └── relatorio.pdf
 ```
 
-Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman original foi mantida com seus testes.
+Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman parte do template da aula, personalizado para esta API key, dispositivo, entidade e modelo de dados. O projeto Wokwi configurado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); os arquivos `firmware/main.py` e `firmware/diagram.json` são a cópia correspondente para reprodução local.
 
 ## Hardware e firmware
 
@@ -49,9 +51,9 @@ Os JSONs `postman/resultado-etapa*.json` são evidências das execuções conclu
 | Relé | 26 | ligar/desligar |
 | Servo da janela | 27 | posição de 0 a 180° |
 
-Antes de gravar, abra `firmware/main.py` e configure `SSID` e `SENHA` com os dados da sua rede. No Wokwi, use `Wokwi-GUEST` e senha vazia. O firmware conecta a `broker.hivemq.com:1883`, mantém a API key e o Device ID acima e publica medidas a cada intervalo configurado. Copie o arquivo para a placa como `main.py`.
+O firmware entregue é a versão executada no projeto Wokwi vinculado acima. Ele usa `Wokwi-GUEST` sem senha e conecta a `broker.hivemq.com:1883`. Em uma placa física, altere `SSID` e `SENHA` para a rede local e copie `firmware/main.py` como `main.py`; não grave senha pessoal no repositório. `firmware/diagram.json` registra as peças e ligações da simulação Wokwi.
 
-Os valores ADC em `SOLO_RAW_SECO`, `SOLO_RAW_MOLHADO`, `LUZ_RAW_ESCURO` e `LUZ_RAW_CLARO` são valores provisórios de faixa completa, não calibrações medidas. Leia os valores reais com o circuito e ajuste-os antes de apresentar percentuais como calibrados. Não há senha Wi-Fi pessoal no pacote.
+O firmware Wokwi usa faixa ADC provisória de 12 bits, mapeada para percentuais. Isso reproduz a direção observada no simulador; não representa calibração medida do sensor físico. Recalibre no circuito real antes de apresentar os percentuais como medição física. Não há senha Wi-Fi pessoal no pacote.
 
 ### Tópicos MQTT
 
@@ -126,9 +128,11 @@ Para configurar o Grafana em uma instalação nova: abra `http://localhost:3000`
 
 No ambiente de preparação, os nove serviços ficaram `healthy`; a configuração Compose passou na validação; a ponte MQTT foi testada nos dois sentidos e filtrou outra chave. Grupo/dispositivo receberam HTTP 201 e uma amostra MQTT atualizou Orion. Etapa 1 Postman: 6 requisições e 10 asserções sem falha. Etapa 2: 6 requisições e 31 asserções sem falha. Na Etapa 4, as subscrições foram criadas e, após nova publicação de medidas, as 11 verificações seguintes passaram com 38 asserções: entrega Cygnus, histórico MySQL, alerta, fonte de dados e dashboard. Resultados estão em `postman/resultado-etapa1.json`, `resultado-etapa2.json` e `resultado-etapa4.json`.
 
-A Etapa 3 não foi executada com ESP32 física ou Wokwi, pois nenhum dispositivo/projeto Wokwi foi fornecido. O firmware passou na verificação sintática, mas comandos/GPIOs precisam ser confirmados no hardware. Também faltam calibrações reais do Projeto 1, coordenadas da estufa e nomes/RAs dos integrantes. Portanto, esses dados estão identificados como pendentes e não foram inventados. Para entrega de demonstração integral, complete-os, execute a coleção completa no Runner com a estufa ligada e exporte o resultado final.
+A Etapa 3 foi executada no simulador Wokwi e validou o caminho completo para HiveMQ, ponte MQTT, IoT Agent e Orion, além dos quatro comandos e seus limites. Essa evidência cobre a simulação; não substitui a calibração dos sensores nem a validação elétrica em uma ESP32 física. Ainda faltam calibrações reais do Projeto 1, coordenadas da estufa e nomes/RAs dos integrantes, que devem ser preenchidos pelo grupo.
 
 ## Organização do projeto
 
 O PDF `relatorio.pdf` contém a arquitetura, decisões, respostas R1–R8 e o registro de validações/pendências. Nesta pasta estão os arquivos executáveis e documentos finais, organizados conforme o modelo de entrega.
+
+
 
