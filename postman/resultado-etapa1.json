@@ -1,0 +1,4172 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "1aa9761f-e243-542d-b4a6-694d7c3234c9"
+    },
+    "item": [
+      {
+        "id": "b9f6e843-29a7-419e-a267-499579cf1eaa",
+        "name": "0 - Recomeçar do zero [Pronto]",
+        "description": {
+          "content": "Apaga subscrições, dispositivo, entidade e grupo do seu caminho. O histórico do MySQL e o painel permanecem. Rode a coleção inteira no Runner (começando por aqui) para provar que tudo funciona a partir do zero. Reset completo (contêineres e volumes, inclusive histórico e painel): `docker compose down -v` na pasta `plataforma`.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "80d765ee-0ebb-4003-9e14-91e9886c0cf2",
+            "name": "0.1 Apaga as subscrições do caminho",
+            "request": {
+              "description": {
+                "content": "Lista as subscrições do caminho e apaga **todas** (use antes de rodar a coleção inteira no Runner).",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "subscriptions"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "89b65d18-b91b-488d-a032-b3963e7ca902",
+                  "type": "text/javascript",
+                  "exec": [
+                    "const subs = pm.response.json();",
+                    "subs.forEach(s => pm.sendRequest({ url: \"http://\" + pm.collectionVariables.get(\"orion\") + \"/v2/subscriptions/\" + s.id, method: \"DELETE\",",
+                    "  header: { \"fiware-service\": pm.collectionVariables.get(\"servico\"), \"fiware-servicepath\": pm.collectionVariables.get(\"caminho\") } }, () => {}));",
+                    "pm.test(\"Subscrições apagadas: \" + subs.length, () => pm.expect(subs).to.be.an(\"array\"));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "0cbc61fc-4d71-4c38-9f42-b203fdab3d08",
+            "name": "0.2 Apaga o dispositivo",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "devices",
+                  "{{device_id}}"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "DELETE"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "bb160b81-30cc-4595-80c8-b32ac402a1a7",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "72f2c602-16e5-4812-943e-c81f2156f320",
+            "name": "0.3 Apaga a entidade",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "DELETE"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "394a3ad1-fd91-48df-9b5b-991e980ce853",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "29d191ff-3c88-4ff9-b028-a292402b7727",
+            "name": "0.4 Apaga o grupo",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "groups"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [
+                  {
+                    "key": "resource",
+                    "value": "/iot/json"
+                  },
+                  {
+                    "key": "apikey",
+                    "value": "{{apikey}}"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "DELETE"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "e397e401-5d70-4c58-92a9-841e6e9cb125",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "bb6f7572-6302-46e4-b01e-cfd54a152b6c",
+        "name": "Etapa 1 - Ambiente",
+        "description": {
+          "content": "Verificações prontas: o ambiente de `plataforma/docker-compose.yml` está no ar.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+            "name": "1.1 [Verificação] Orion no ar",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "version"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "77123a9e-ff91-47f8-989e-3666b9044415",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "pm.test(\"Orion 4.5.0\", () => pm.expect(pm.response.json().orion.version).to.eql(\"4.5.0\"));"
+                  ],
+                  "_lastExecutionId": "ef80d45e-cf01-43f6-b8a4-3101b11a255c"
+                }
+              }
+            ]
+          },
+          {
+            "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+            "name": "1.2 [Verificação] IoT Agent no ar",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "about"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "8ddb07a3-7ff9-4dfa-8622-eb14299d6eaf",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "pm.test(\"IoT Agent JSON 3.14.0\", () => pm.expect(pm.response.json().version).to.eql(\"3.14.0\"));"
+                  ],
+                  "_lastExecutionId": "2b7d5427-e94e-4fc3-abe9-680f02e3e9a8"
+                }
+              }
+            ]
+          },
+          {
+            "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+            "name": "1.3 [Verificação] Cygnus no ar",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v1",
+                  "version"
+                ],
+                "host": [
+                  "{{cygnus}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "21a7f18e-b4c5-49bf-a6ab-7f6b86c93198",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+                  ],
+                  "_lastExecutionId": "4dc3004e-45b9-420b-97ad-1c6351a62f1d"
+                }
+              }
+            ]
+          },
+          {
+            "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+            "name": "1.4 [Verificação] Grafana no ar",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "health"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "5c7cba76-f256-49ba-9699-29ea78204e20",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "pm.test(\"Banco do Grafana ok\", () => pm.expect(pm.response.json().database).to.eql(\"ok\"));"
+                  ],
+                  "_lastExecutionId": "20689145-7cf5-4f91-9e3a-1f45c0d77c5d"
+                }
+              }
+            ]
+          },
+          {
+            "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+            "name": "1.5 [Verificação] Consumidor no ar",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [],
+                "host": [
+                  "{{consumidor}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "0d9aaabe-ef86-4cb2-8e16-57241e470b2f",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+                  ],
+                  "_lastExecutionId": "4188ffc1-6a21-465e-ba6f-3878006aeb73"
+                }
+              }
+            ]
+          },
+          {
+            "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+            "name": "1.6 [Verificação] Variável apikey preenchida",
+            "request": {
+              "description": {
+                "content": "Edite as variáveis da coleção: `apikey` deve ser a **mesma** API key usada na ponte (`mosquitto/mosquitto.conf`).",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "about"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "1d8361b9-c25a-4076-b914-7776f6a14b96",
+                  "type": "text/javascript",
+                  "exec": [
+                    "const k = pm.collectionVariables.get(\"apikey\");",
+                    "pm.test(\"apikey com 4 a 24 letras e números\", () => pm.expect(k).to.match(/^[A-Za-z0-9]{4,24}$/));",
+                    "pm.test(\"apikey diferente do valor de exemplo\", () => pm.expect(k).to.not.eql(\"troqueesteid\"));"
+                  ],
+                  "_lastExecutionId": "6f0e0c5f-338a-4c9a-86ea-d02c314f0d83"
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "945a1567-a049-4547-8213-c5f834a191ed",
+        "name": "Etapa 2 - Provisionamento",
+        "description": {
+          "content": "Grupo, dispositivo e o registro que o IoT Agent cria no Orion.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "365a208d-2f22-4ddd-a644-095496ca8f52",
+            "name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+            "request": {
+              "description": {
+                "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "groups"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"groups\": [\n        {\n            \"apikey\": \"{{apikey}}\",\n            \"cbroker\": \"http://orion:1026\",\n            \"entity_type\": \"Greenhouse\",\n            \"resource\": \"/iot/json\",\n            \"autoprovision\": false\n        }\n    ]\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "74b1fe2a-5b58-468d-be93-fe4b67c6ec6c",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"201 Created (ou 409 se o grupo já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
+                    "pm.sendRequest({ url: \"http://\" + pm.collectionVariables.get(\"iotagent\") + \"/iot/groups\",",
+                    "  header: { \"fiware-service\": pm.collectionVariables.get(\"servico\"), \"fiware-servicepath\": pm.collectionVariables.get(\"caminho\") } }, (err, res) => {",
+                    "  const g = (res.json().groups || []).find(x => x.apikey === pm.collectionVariables.get(\"apikey\"));",
+                    "  pm.test(\"Grupo da apikey existe no serviço/caminho da coleção\", () => pm.expect(g).to.exist);",
+                    "  if (!g) return;",
+                    "  pm.test(\"Tipo Greenhouse\", () => pm.expect(g.entity_type).to.eql(\"Greenhouse\"));",
+                    "  pm.test(\"Recurso /iot/json\", () => pm.expect(g.resource).to.eql(\"/iot/json\"));",
+                    "  if (g.cbroker) pm.test(\"Orion visto de dentro da rede Docker\", () => pm.expect(g.cbroker).to.match(/^http:\\/\\/orion:1026/));",
+                    "  pm.test(\"Dispositivos não provisionados são rejeitados\", () => pm.expect(g.autoprovision).to.eql(false));",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "83324e43-a3d3-4ea4-89ab-4fd75127b956",
+            "name": "2.2 [Complete o corpo] Dispositivo da estufa",
+            "request": {
+              "description": {
+                "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "devices"
+                ],
+                "host": [
+                  "{{iotagent}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"devices\": [\n        {\n            \"device_id\": \"{{device_id}}\",\n            \"apikey\": \"{{apikey}}\",\n            \"entity_name\": \"{{entidade}}\",\n            \"entity_type\": \"Greenhouse\",\n            \"transport\": \"MQTT\",\n            \"timezone\": \"America/Sao_Paulo\",\n            \"attributes\": [\n                {\n                    \"object_id\": \"t\",\n                    \"name\": \"temperature\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"rh\",\n                    \"name\": \"relativeHumidity\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"sm\",\n                    \"name\": \"soilMoisture\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"lx\",\n                    \"name\": \"illuminance\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"r\",\n                    \"name\": \"relayState\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"wa\",\n                    \"name\": \"windowAngle\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"si\",\n                    \"name\": \"samplingInterval\",\n                    \"type\": \"Number\"\n                }\n            ],\n            \"commands\": [\n                {\n                    \"name\": \"setRelay\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setServo\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setInterval\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setSending\",\n                    \"type\": \"command\"\n                }\n            ],\n            \"static_attributes\": [\n                {\n                    \"name\": \"name\",\n                    \"type\": \"Text\",\n                    \"value\": \"Estufa LB Gestufa\"\n                },\n                {\n                    \"name\": \"location\",\n                    \"type\": \"geo:json\",\n                    \"value\": {\n                        \"type\": \"Point\",\n                        \"coordinates\": [\n                            0.0,\n                            0.0\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "28187c34-fa07-4004-a778-bc5454f33ebf",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"201 Created (ou 409 se já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
+                    "pm.sendRequest({ url: \"http://\" + pm.collectionVariables.get(\"iotagent\") + \"/iot/devices/\" + pm.collectionVariables.get(\"device_id\"),",
+                    "  header: { \"fiware-service\": pm.collectionVariables.get(\"servico\"), \"fiware-servicepath\": pm.collectionVariables.get(\"caminho\") } }, (err, res) => {",
+                    "  pm.test(\"Dispositivo encontrado no IoT Agent\", () => pm.expect(res.code).to.eql(200));",
+                    "  if (res.code !== 200) return;",
+                    "  const d = res.json();",
+                    "  pm.test(\"Mesma apikey do grupo\", () => pm.expect(d.apikey).to.eql(pm.collectionVariables.get(\"apikey\")));",
+                    "  pm.test(\"Entidade e tipo corretos\", () => { pm.expect(d.entity_name).to.eql(pm.collectionVariables.get(\"entidade\")); pm.expect(d.entity_type).to.eql(\"Greenhouse\"); });",
+                    "  pm.test(\"Transporte MQTT\", () => pm.expect(d.transport).to.eql(\"MQTT\"));",
+                    "  const esperados = [\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"];",
+                    "  const attrs = d.attributes || [];",
+                    "  esperados.forEach(n => pm.test(\"Atributo \" + n + \" (Number, com object_id)\", () => { const a = attrs.find(x => x.name === n); pm.expect(a, n).to.exist; pm.expect(a.type).to.eql(\"Number\"); pm.expect(a.object_id, \"defina o object_id de \" + n).to.be.a(\"string\").and.not.empty; }));",
+                    "  pm.test(\"object_id diferentes entre si\", () => { const ids = attrs.map(a => a.object_id); pm.expect(new Set(ids).size).to.eql(ids.length); });",
+                    "  [\"setRelay\", \"setServo\", \"setInterval\", \"setSending\"].forEach(c => pm.test(\"Comando \" + c, () => pm.expect((d.commands || []).map(x => x.name)).to.include(c)));",
+                    "  const est = d.static_attributes || [];",
+                    "  pm.test(\"Estático name (Text)\", () => pm.expect(est.some(s => s.name === \"name\" && s.type === \"Text\")).to.be.true);",
+                    "  pm.test(\"Estático location (geo:json, Point)\", () => { const l = est.find(s => s.name === \"location\"); pm.expect(l).to.exist; pm.expect(l.type).to.eql(\"geo:json\"); pm.expect(l.value.type).to.eql(\"Point\"); });",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "375f2199-fca7-4d10-9ede-252d2a8a8d5f",
+            "name": "2.3 [Pronto] Quem atende os comandos da estufa?",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Consultando o **Orion**, descubra qual serviço ele aciona quando alguém atualiza um comando da estufa.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "registrations"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "a2edbab8-3ab9-402c-9cad-976e6aa3b833",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const regs = pm.response.json();",
+                    "pm.test(\"A resposta é uma lista de registros\", () => pm.expect(regs).to.be.an(\"array\").that.is.not.empty);",
+                    "const r = (Array.isArray(regs) ? regs : []).find(x => ((x.dataProvided || {}).entities || []).some(e => e.id === pm.collectionVariables.get(\"entidade\")));",
+                    "pm.test(\"Registro da entidade da estufa\", () => pm.expect(r).to.exist);",
+                    "pm.test(\"Os 4 comandos são atendidos pelo IoT Agent\", () => { pm.expect(r, \"registro não encontrado\").to.exist; pm.expect(r.provider.http.url).to.match(/iot-agent:4041/); pm.expect(r.dataProvided.attrs).to.include.members([\"setRelay\", \"setServo\", \"setInterval\", \"setSending\"]); });"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "a85eca22-7b9b-44b0-83a2-54727887ec30",
+            "name": "2.4 [Verificação] A medida de teste chegou ao Orion",
+            "request": {
+              "description": {
+                "content": "Antes de rodar esta verificação, publique **pelo HiveMQ WebSocket Client** uma medida de teste da estufa (tópico e JSON definidos por você, a partir da convenção do IoT Agent). Veja o passo 2.5 do guia.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "6e929069-d03f-43ef-9f60-ea34bca40c49",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda uma medida (de teste ou do firmware)",
+                    "setTimeout(() => {}, 6000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "b776cb0c-da72-461f-aec2-5e5afc7081f1",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"Pelo menos uma medida numérica\", () => pm.expect([\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"].some(a => typeof e[a] === \"number\")).to.be.true);",
+                    "pm.test(\"TimeInstant da medida\", () => pm.expect(e).to.have.property(\"TimeInstant\"));"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "344f1d68-6f9e-4098-a2df-a07026b02744",
+        "name": "Etapa 3 - Firmware e comandos",
+        "description": {
+          "content": "Medidas da estufa e os 4 comandos, sempre **pelo Orion**.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "a4a7e9a8-b2ad-423c-aaee-a23ac2bed995",
+            "name": "3.1 [Pronto] A estufa está publicando",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Com o firmware rodando (ESP32 ou Wokwi), consulte a estufa no Orion em `keyValues` com `name`, os **7 atributos** de medida e o instante da última medida.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "name,temperature,relativeHumidity,soilMoisture,illuminance,relayState,windowAngle,samplingInterval,TimeInstant"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "53c34273-f454-4b79-8e8a-2f9f889b6591",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "[\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"].forEach(a => pm.test(a + \" é número\", () => pm.expect(e[a], a + \" ausente ou como texto\").to.be.a(\"number\")));",
+                    "pm.test(\"name da estufa\", () => pm.expect(e.name).to.be.a(\"string\"));",
+                    "pm.test(\"Medida recente (menos de 15 s)\", () => pm.expect((Date.now() - Date.parse(e.TimeInstant)) / 1000).to.be.below(15));",
+                    "pm.test(\"Faixas: relé 0/1, janela 0..180, intervalo 2..10\", () => { pm.expect([0, 1]).to.include(e.relayState); pm.expect(e.windowAngle).to.be.within(0, 180); pm.expect(e.samplingInterval).to.be.within(2, 10); });"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "efe259ce-9a97-4fe5-ade3-504225f628d6",
+            "name": "3.2 [Pronto] Ligue o relé",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Pelo **Orion**, ligue o relé da estufa.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setRelay\": {\n        \"type\": \"command\",\n        \"value\": 1\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "7d65b39e-f261-470e-9d43-61012e6241ab",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "eb0279e2-9fde-44ac-83be-65fa5f528c34",
+            "name": "3.3 [Pronto] O relé ligou?",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Consulte o **estado** e a **resposta** do comando `setRelay` e o atributo que mostra o relé.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "setRelay_status,setRelay_info,relayState"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "e56eb03a-f62e-447d-98c4-2fc26026bd28",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "3e2abfb7-826d-4941-a213-2c367e7d8be6",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"setRelay_status OK (a estufa respondeu)\", () => pm.expect(e.setRelay_status).to.eql(\"OK\"));",
+                    "pm.test(\"setRelay_info OK (a estufa executou)\", () => pm.expect(e.setRelay_info).to.eql(\"OK\"));",
+                    "pm.test(\"relayState = 1\", () => pm.expect(e.relayState).to.eql(1));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "9f2c983c-dba1-48ca-b88e-bf3be68b48ae",
+            "name": "3.4 [Pronto] Abra a janela a 90°",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Pelo **Orion**, posicione o servomotor da janela em 90°.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setServo\": {\n        \"type\": \"command\",\n        \"value\": 90\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "766c494d-79f7-4977-a226-3be19340b164",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "037383b9-f514-47e9-8f74-d2a0a36e314b",
+            "name": "3.5 [Verificação] Janela a 90°",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "setServo_status,setServo_info,windowAngle"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "a2d2adeb-d181-4c6b-9c2c-6ae4752a0bb4",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "f6b82b97-1c66-472e-b18c-f283f22a235e",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"setServo executado\", () => { pm.expect(e.setServo_status).to.eql(\"OK\"); pm.expect(e.setServo_info).to.eql(\"OK\"); });",
+                    "pm.test(\"windowAngle = 90\", () => pm.expect(e.windowAngle).to.eql(90));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "884db0fa-a65d-44d5-8ed9-94a792701696",
+            "name": "3.6 [Pronto] Comando inválido: janela a 200°",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Envie `setServo` = **200**.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setServo\": {\n        \"type\": \"command\",\n        \"value\": 200\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "084eca9a-6367-452e-9719-0d8c16a67e5f",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "eed998fd-f1dd-43ef-ad7e-c2f154c28e8a",
+            "name": "3.7 [Pronto] A estufa recusou?",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Consulte o resultado do comando e o ângulo da janela. **Responda no relatório:** por que o `setServo_status` é `OK` se a estufa recusou o valor?\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "setServo_status,setServo_info,windowAngle"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "d4aecdb2-1035-4fa4-b153-e670dc58ad0f",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "6429e6b9-9609-4406-a9c0-730c63e53333",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"setServo_info começa com ERRO\", () => pm.expect(String(e.setServo_info)).to.match(/^ERRO/));",
+                    "pm.test(\"Janela preservada em 90°\", () => pm.expect(e.windowAngle).to.eql(90));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "ee45d9df-7ff5-4d34-96f4-8fae66b0b36d",
+            "name": "3.8 [Pronto] Colete a cada 5 s",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Pelo **Orion**, mude o intervalo de coleta para **5 s**.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setInterval\": {\n        \"type\": \"command\",\n        \"value\": 5\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "a54c1d28-f381-45bc-9311-59e339152610",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "ba0985a7-0ec8-4b92-8eea-a6342ab9e706",
+            "name": "3.9 [Verificação] Intervalo de 5 s",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "setInterval_info,samplingInterval"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "a634eaec-1937-4845-a19e-a6c6b679d9fa",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "f9ed7dd1-aafc-43bd-b5e8-e8877911c5ca",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"setInterval executado\", () => pm.expect(e.setInterval_info).to.eql(\"OK\"));",
+                    "pm.test(\"samplingInterval = 5\", () => pm.expect(e.samplingInterval).to.eql(5));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "a3c8cbfc-aa49-450b-b0cd-be8f21ee211c",
+            "name": "3.10 [Pronto] Intervalo inválido: 30 s",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Envie `setInterval` = **30**.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setInterval\": {\n        \"type\": \"command\",\n        \"value\": 30\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "64250127-101c-4e09-aa6d-628eb33df734",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "b4c2d358-4daa-424d-99c8-60542ee3ac7f",
+            "name": "3.11 [Verificação] Intervalo preservado",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [
+                  {
+                    "key": "options",
+                    "value": "keyValues"
+                  },
+                  {
+                    "key": "attrs",
+                    "value": "setInterval_info,samplingInterval"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "7ded0b5f-4dfc-415e-a7ff-77ec5f721e79",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "d16c3180-d358-4091-89b7-a9d357f49463",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const e = pm.response.json();",
+                    "pm.test(\"setInterval recusado (ERRO)\", () => pm.expect(String(e.setInterval_info)).to.match(/^ERRO/));",
+                    "pm.test(\"samplingInterval continua 5\", () => pm.expect(e.samplingInterval).to.eql(5));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "18f68c13-4227-4be9-baae-8d845982c0c5",
+            "name": "3.12 [Pronto] Desative o envio",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Pelo **Orion**, desative o envio das medidas (o antigo `Desativar` do Projeto 1).\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setSending\": {\n        \"type\": \"command\",\n        \"value\": 0\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "2298fbd5-b7fa-4704-9f60-e78e32a34347",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "f270e6db-86b5-4449-8fd1-cb204a06df60",
+            "name": "3.13 [Verificação] Envio desativado",
+            "request": {
+              "description": {
+                "content": "Lê o horário da última temperatura, espera 12 s (mais que o maior intervalo permitido) e lê de novo: o horário não pode mudar. Leva cerca de 16 s.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs",
+                  "temperature"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "f495bba9-a3f3-441f-99c6-04b3e0783650",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a ida e a volta do comando pelo broker público",
+                    "setTimeout(() => {}, 4000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "4b0496f5-3bf9-4424-bffe-95d094a77c86",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const idade = a => { const t = (((a || {}).metadata || {}).TimeInstant || {}).value; return t ? (Date.now() - Date.parse(t)) / 1000 : 1e9; };",
+                    "const antes = ((pm.response.json().metadata || {}).TimeInstant || {}).value;",
+                    "pm.test(\"A temperatura tem o metadado TimeInstant\", () => pm.expect(antes).to.be.a(\"string\"));",
+                    "setTimeout(() => pm.sendRequest({ url: pm.request.url.toString(), header: { \"fiware-service\": pm.collectionVariables.get(\"servico\"), \"fiware-servicepath\": pm.collectionVariables.get(\"caminho\") } }, (err, res) => {",
+                    "  const depois = ((res.json().metadata || {}).TimeInstant || {}).value;",
+                    "  pm.test(\"Nenhuma medida nova em 12 s\", () => pm.expect(depois).to.eql(antes));",
+                    "}), 12000);"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "72000841-18b8-4054-854a-a9b680def6e5",
+            "name": "3.14 [Pronto] Reative o envio",
+            "request": {
+              "description": {
+                "content": "**Requisição pronta.** Pelo **Orion**, reative o envio das medidas.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "PATCH",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"setSending\": {\n        \"type\": \"command\",\n        \"value\": 1\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "8d60a5b0-02f9-458f-b95f-7dbfc5073297",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "efa1edd0-bc83-4144-8d59-36f6e1b0ab33",
+            "name": "3.15 [Verificação] Envio reativado",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "entities",
+                  "{{entidade}}",
+                  "attrs",
+                  "temperature"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "1a882925-fca7-4d55-8f11-17a9a35ff559",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda pelo menos uma medida no intervalo de 5 s",
+                    "setTimeout(() => {}, 8000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "2d629951-1041-4124-a073-2f1ac3fc2843",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const idade = a => { const t = (((a || {}).metadata || {}).TimeInstant || {}).value; return t ? (Date.now() - Date.parse(t)) / 1000 : 1e9; };",
+                    "pm.test(\"Temperatura medida há menos de 8 s\", () => pm.expect(idade(pm.response.json())).to.be.below(8));"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "87b93759-32c5-453b-a584-11d083d4ba1d",
+        "name": "Etapa 4 - Subscrições, histórico e painel",
+        "description": {
+          "content": "Alerta, Cygnus/MySQL e o painel do Grafana.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "84ddfbf2-3e99-4122-8754-b46248b1c896",
+            "name": "4.1 [Complete o corpo] Subscrição do histórico (Cygnus)",
+            "request": {
+              "description": {
+                "content": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "subscriptions"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"description\": \"Historico da estufa para o Cygnus\",\n    \"subject\": {\n        \"entities\": [\n            {\n                \"id\": \"{{entidade}}\",\n                \"type\": \"Greenhouse\"\n            }\n        ]\n    },\n    \"notification\": {\n        \"http\": {\n            \"url\": \"http://cygnus:5050/notify\"\n        },\n        \"attrs\": [\n            \"temperature\",\n            \"relativeHumidity\",\n            \"soilMoisture\",\n            \"illuminance\",\n            \"relayState\",\n            \"windowAngle\",\n            \"samplingInterval\"\n        ],\n        \"attrsFormat\": \"normalized\"\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "06949d7b-dd88-4683-a3b2-5dbe5dc1ee55",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                    "const loc = pm.response.headers.get(\"Location\") || \"\";",
+                    "pm.test(\"Location com o id da subscrição\", () => pm.expect(loc).to.include(\"/v2/subscriptions/\"));",
+                    "if (loc) pm.collectionVariables.set(\"subHistorico\", loc.split(\"/\").pop());"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "717fadbc-dbc0-443c-8543-eef38491cb47",
+            "name": "4.2 [Verificação] Subscrição do histórico entregando",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "subscriptions",
+                  "{{subHistorico}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "35d81df1-60b1-41dc-b543-85d099b2d9e4",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda algumas notificações",
+                    "setTimeout(() => {}, 8000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "f0c79ed6-7f3b-4d8b-911b-fa6e0d5aa9c8",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const s = pm.response.json();",
+                    "pm.test(\"Só entidades Greenhouse\", () => pm.expect(s.subject.entities.every(e => e.type === \"Greenhouse\")).to.be.true);",
+                    "pm.test(\"Os 7 atributos de medida (e só eles)\", () => pm.expect(s.notification.attrs).to.have.members([\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"]));",
+                    "pm.test(\"Formato aceito pelo Cygnus\", () => pm.expect(s.notification.attrsFormat).to.eql(\"normalized\"));",
+                    "pm.test(\"Notificações entregues (lastSuccessCode 200)\", () => { pm.expect(s.notification.timesSent).to.be.above(0); pm.expect(s.notification.lastSuccessCode, s.notification.lastFailureReason).to.eql(200); });"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "73a09a0d-1c0c-4c53-9de8-321f990194cb",
+            "name": "4.3 [Verificação] O Cygnus está recebendo",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v1",
+                  "stats"
+                ],
+                "host": [
+                  "{{cygnus}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "86471d60-80dd-4ba4-a2fa-fa9b213cd3e9",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "pm.test(\"Eventos recebidos\", () => pm.expect(pm.response.json().stats.sources[0].num_received_events).to.be.above(0));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "ca6ec558-a31c-45c6-8a41-f188e14960ce",
+            "name": "4.4 [Complete o corpo] Notificação de solo seco (serviço externo)",
+            "request": {
+              "description": {
+                "content": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "subscriptions"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"description\": \"Alerta de solo seco da estufa\",\n    \"subject\": {\n        \"entities\": [\n            {\n                \"id\": \"{{entidade}}\",\n                \"type\": \"Greenhouse\"\n            }\n        ],\n        \"condition\": {\n            \"attrs\": [\n                \"soilMoisture\"\n            ],\n            \"expression\": {\n                \"q\": \"soilMoisture<30\"\n            }\n        }\n    },\n    \"notification\": {\n        \"http\": {\n            \"url\": \"http://consumidor:3000/alerta-estufa\"\n        },\n        \"attrs\": [\n            \"soilMoisture\",\n            \"relayState\",\n            \"TimeInstant\"\n        ],\n        \"attrsFormat\": \"keyValues\"\n    },\n    \"throttling\": 10\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "0072aabd-7e6c-47f5-8a85-02412c437d86",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                    "const loc = pm.response.headers.get(\"Location\") || \"\";",
+                    "if (loc) pm.collectionVariables.set(\"subAlerta\", loc.split(\"/\").pop());"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "f588f091-36da-47c4-acbf-2afb0f95bbdf",
+            "name": "4.5 [Verificação] Subscrição de alerta",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "v2",
+                  "subscriptions",
+                  "{{subAlerta}}"
+                ],
+                "host": [
+                  "{{orion}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "fiware-service",
+                  "value": "{{servico}}"
+                },
+                {
+                  "key": "fiware-servicepath",
+                  "value": "{{caminho}}"
+                }
+              ],
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "34674db5-8168-4792-b69a-907498948e45",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const s = pm.response.json();",
+                    "pm.test(\"Notifica o consumidor em /alerta-estufa\", () => pm.expect(s.notification.http.url).to.match(/consumidor:3000\\/alerta-estufa$/));",
+                    "pm.test(\"Condição com expressão q sobre soilMoisture\", () => pm.expect(((s.subject.condition || {}).expression || {}).q || \"\").to.match(/soilMoisture\\s*<\\s*30/));",
+                    "pm.test(\"keyValues\", () => pm.expect(s.notification.attrsFormat).to.eql(\"keyValues\"));",
+                    "pm.test(\"Só soilMoisture, relayState e TimeInstant\", () => pm.expect(s.notification.attrs).to.have.members([\"soilMoisture\", \"relayState\", \"TimeInstant\"]));",
+                    "pm.test(\"Limita a frequência das notificações\", () => pm.expect(s.throttling || 0, \"cada medida muda o TimeInstant e dispara a subscrição\").to.be.above(0));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "0ccd0bb1-c1ae-46a9-a67f-1e50511f86e3",
+            "name": "4.6 [Pronto] Limpa o consumidor",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "notificacoes"
+                ],
+                "host": [
+                  "{{consumidor}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "DELETE"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "474a1ace-b906-466b-89f7-758830655cd1",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "6d0069db-ad6a-4305-a274-aaa52242ca2c",
+            "name": "4.7 [Pronto] Simula uma medida de solo seco (HTTP)",
+            "request": {
+              "description": {
+                "content": "Envia **uma** medida pela porta HTTP do IoT Agent (7896), sem passar pelo broker. A chave `soilMoisture` não é um `object_id`, então o IoT Agent a usa como nome do atributo. Na demonstração, prefira secar o sensor (ou mover o potenciômetro no Wokwi).",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "iot",
+                  "json"
+                ],
+                "host": [
+                  "{{iotahttp}}"
+                ],
+                "query": [
+                  {
+                    "key": "k",
+                    "value": "{{apikey}}"
+                  },
+                  {
+                    "key": "i",
+                    "value": "{{device_id}}"
+                  }
+                ],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"soilMoisture\": 12\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "6fb44ea4-99c6-4cfe-adc1-ffc076f98060",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Medida aceita\", () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "11c760d3-cf6a-44ba-920f-81aa2bab9eea",
+            "name": "4.8 [Verificação] Alerta recebido",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "notificacoes"
+                ],
+                "host": [
+                  "{{consumidor}}"
+                ],
+                "query": [
+                  {
+                    "key": "caminho",
+                    "value": "/alerta-estufa"
+                  }
+                ],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "aba0eed9-9873-4163-931b-88f86d6d83f8",
+                  "type": "text/javascript",
+                  "exec": [
+                    "// aguarda a notificação",
+                    "setTimeout(() => {}, 2000);"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "a42bc1b2-a146-4c10-8350-7e31b0cafda2",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const n = pm.response.json().filter(x => x.corpo && x.corpo.subscriptionId === pm.collectionVariables.get(\"subAlerta\"));",
+                    "pm.test(\"Pelo menos uma notificação da subscrição de alerta\", () => pm.expect(n.length).to.be.above(0));",
+                    "pm.test(\"Notificação com soilMoisture abaixo de 30\", () => pm.expect(n.some(x => x.corpo.data.some(d => d.soilMoisture < 30))).to.be.true);"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "249cf78e-aa4c-44ba-8923-ea817c9847eb",
+            "name": "4.9 [Verificação] Fonte de dados MySQL",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "datasources"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "basic",
+                "basic": [
+                  {
+                    "type": "string",
+                    "value": "{{grafana_usuario}}",
+                    "key": "username"
+                  },
+                  {
+                    "type": "string",
+                    "value": "{{grafana_senha}}",
+                    "key": "password"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "4046bb42-6538-4272-ac40-38246fa5b7c7",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const ds = pm.response.json().find(d => d.type === \"mysql\");",
+                    "pm.test(\"Existe uma fonte de dados MySQL\", () => pm.expect(ds, \"crie a fonte de dados em Connections > Data sources\").to.exist);",
+                    "if (ds) {",
+                    "  pm.collectionVariables.set(\"dsUid\", ds.uid);",
+                    "  pm.test(\"Host visto de dentro da rede Docker\", () => pm.expect(ds.url).to.eql(\"mysql-db:3306\"));",
+                    "  pm.test(\"Banco fei\", () => pm.expect((ds.jsonData || {}).database || ds.database).to.eql(\"fei\"));",
+                    "  pm.test(\"Usuário somente leitura (grafana)\", () => pm.expect(ds.user).to.eql(\"grafana\"));",
+                    "}"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "29b62c51-5d3f-4b1f-83be-f70f205776b9",
+            "name": "4.10 [Verificação] Save & test",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "datasources",
+                  "uid",
+                  "{{dsUid}}",
+                  "health"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "basic",
+                "basic": [
+                  {
+                    "type": "string",
+                    "value": "{{grafana_usuario}}",
+                    "key": "username"
+                  },
+                  {
+                    "type": "string",
+                    "value": "{{grafana_senha}}",
+                    "key": "password"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "253466e4-35bd-44b0-8185-9030f9cff481",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "pm.test(\"Database Connection OK\", () => pm.expect(pm.response.json().status).to.eql(\"OK\"));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "a60a5862-381c-45f8-b8ce-169e44cdb1ba",
+            "name": "4.11 [Verificação] Histórico da estufa no MySQL",
+            "request": {
+              "description": {
+                "content": "Consulta, pelo Grafana, as linhas gravadas pelo Cygnus na tabela `estufa` nos últimos 30 s.",
+                "type": "text/plain"
+              },
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "ds",
+                  "query"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"from\": \"now-15m\",\n    \"to\": \"now\",\n    \"queries\": [\n        {\n            \"refId\": \"A\",\n            \"datasource\": {\n                \"type\": \"mysql\",\n                \"uid\": \"{{dsUid}}\"\n            },\n            \"rawSql\": \"SELECT COUNT(DISTINCT attrName) AS atributos, GROUP_CONCAT(DISTINCT attrName ORDER BY attrName) AS nomes, COUNT(*) AS linhas FROM estufa WHERE recvTime >= UTC_TIMESTAMP() - INTERVAL 30 SECOND\",\n            \"format\": \"table\"\n        }\n    ]\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "auth": {
+                "type": "basic",
+                "basic": [
+                  {
+                    "type": "string",
+                    "value": "{{grafana_usuario}}",
+                    "key": "username"
+                  },
+                  {
+                    "type": "string",
+                    "value": "{{grafana_senha}}",
+                    "key": "password"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "e7a8e365-b548-4074-a2f9-ab6612189dc8",
+                  "type": "text/javascript",
+                  "exec": [
+                    "const r = pm.response.json().results.A;",
+                    "pm.test(\"Consulta executada sem erro\", () => pm.expect(r.error, r.error).to.be.undefined);",
+                    "const f = (r.frames || [])[0] || { schema: { fields: [] }, data: { values: [] } };",
+                    "const col = n => f.data.values[f.schema.fields.map(x => x.name).indexOf(n)] || [];",
+                    "pm.test(\"Linhas novas na tabela estufa\", () => pm.expect(col(\"linhas\")[0]).to.be.above(0));",
+                    "pm.test(\"Somente os 7 atributos de medida\", () => pm.expect(col(\"atributos\")[0], \"gravando: \" + col(\"nomes\")[0] + \". Apague subscrições erradas ao Cygnus\").to.eql(7));"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "b16e264b-9058-48e1-a4e2-7cc0fe3737f8",
+            "name": "4.12 [Verificação] Painel \"Estufa inteligente\" existe",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "search"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "dash-db"
+                  },
+                  {
+                    "key": "query",
+                    "value": "Estufa%20inteligente"
+                  }
+                ],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "basic",
+                "basic": [
+                  {
+                    "type": "string",
+                    "value": "{{grafana_usuario}}",
+                    "key": "username"
+                  },
+                  {
+                    "type": "string",
+                    "value": "{{grafana_senha}}",
+                    "key": "password"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "1af8f082-8db6-4374-8bed-f9dde0bc39a6",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const p = pm.response.json().find(d => d.title.trim().toLowerCase() === \"estufa inteligente\");",
+                    "pm.test(\"Painel salvo com o título Estufa inteligente\", () => pm.expect(p).to.exist);",
+                    "if (p) pm.collectionVariables.set(\"painelUid\", p.uid);"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "48f61434-06d7-4713-8e2c-d14b5dc7550a",
+            "name": "4.13 [Verificação] Conteúdo do painel",
+            "request": {
+              "url": {
+                "protocol": "http",
+                "path": [
+                  "api",
+                  "dashboards",
+                  "uid",
+                  "{{painelUid}}"
+                ],
+                "host": [
+                  "{{grafana}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "basic",
+                "basic": [
+                  {
+                    "type": "string",
+                    "value": "{{grafana_usuario}}",
+                    "key": "username"
+                  },
+                  {
+                    "type": "string",
+                    "value": "{{grafana_senha}}",
+                    "key": "password"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "07da6ebf-ecf9-48af-aec4-a47b41015dcf",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                    "const d = pm.response.json().dashboard;",
+                    "const paineis = (d.panels || []).flatMap(p => p.type === \"row\" ? (p.panels || []) : [p]);",
+                    "const sql = p => (p.targets || []).map(t => t.rawSql || \"\").join(\"\\n\");",
+                    "const tem = (tipos, re) => paineis.some(p => tipos.includes(p.type) && re.test(sql(p)));",
+                    "pm.test(\"Pelo menos 4 painéis\", () => pm.expect(paineis.length).to.be.at.least(4));",
+                    "pm.test(\"a) Série temporal com temperatura e umidade do ar\", () => pm.expect(paineis.some(p => p.type === \"timeseries\" && /temperature/.test(sql(p)) && /relativeHumidity/.test(sql(p)))).to.be.true);",
+                    "pm.test(\"b) Série temporal da umidade do solo\", () => pm.expect(tem([\"timeseries\"], /soilMoisture/)).to.be.true);",
+                    "pm.test(\"c) Linha do tempo (state-timeline) do relé\", () => pm.expect(tem([\"state-timeline\"], /relayState/)).to.be.true);",
+                    "pm.test(\"d) Stat ou Gauge com a luminosidade atual\", () => pm.expect(tem([\"stat\", \"gauge\"], /illuminance/)).to.be.true);",
+                    "pm.test(\"Séries usam o intervalo do painel ($__timeFilter)\", () => pm.expect(paineis.filter(p => p.type === \"timeseries\").every(p => sql(p).includes(\"$__timeFilter\"))).to.be.true);",
+                    "pm.test(\"Atualização automática ligada\", () => pm.expect(d.refresh).to.be.a(\"string\").and.not.empty);"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "string",
+        "value": "localhost:1026",
+        "key": "orion"
+      },
+      {
+        "type": "string",
+        "value": "localhost:4041",
+        "key": "iotagent"
+      },
+      {
+        "type": "string",
+        "value": "localhost:7896",
+        "key": "iotahttp"
+      },
+      {
+        "type": "string",
+        "value": "localhost:3001",
+        "key": "consumidor"
+      },
+      {
+        "type": "string",
+        "value": "localhost:5080",
+        "key": "cygnus"
+      },
+      {
+        "type": "string",
+        "value": "localhost:3000",
+        "key": "grafana"
+      },
+      {
+        "type": "string",
+        "value": "admin",
+        "key": "grafana_usuario"
+      },
+      {
+        "type": "string",
+        "value": "admin",
+        "key": "grafana_senha"
+      },
+      {
+        "type": "string",
+        "value": "fei",
+        "key": "servico"
+      },
+      {
+        "type": "string",
+        "value": "/estufa",
+        "key": "caminho"
+      },
+      {
+        "type": "string",
+        "value": "lbgestufa",
+        "key": "apikey"
+      },
+      {
+        "type": "string",
+        "value": "estufa2604",
+        "key": "device_id"
+      },
+      {
+        "type": "string",
+        "value": "urn:ngsi-ld:Greenhouse:001",
+        "key": "entidade"
+      },
+      {
+        "type": "string",
+        "value": "",
+        "key": "subHistorico"
+      },
+      {
+        "type": "string",
+        "value": "",
+        "key": "subAlerta"
+      },
+      {
+        "type": "string",
+        "value": "",
+        "key": "dsUid"
+      },
+      {
+        "type": "string",
+        "value": "",
+        "key": "painelUid"
+      }
+    ],
+    "info": {
+      "_postman_id": "1aa9761f-e243-542d-b4a6-694d7c3234c9",
+      "name": "CCM520 - Projeto 2 - Estufa na plataforma FIWARE (template)",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Projeto 2 - Estufa inteligente na plataforma FIWARE: a estufa no broker público broker.hivemq.com e uma ponte até o Mosquitto local.\n\nSiga o guia passo a passo. Você define a variável `apikey` e escreve o **corpo** de 4 requisições, marcadas com **[Complete o corpo]**: 2.1 (grupo de serviço), 2.2 (dispositivo), 4.1 (subscrição do Cygnus) e 4.4 (notificação para o serviço externo). Todas as outras requisições ([Pronto] e [Verificação]) já estão prontas.\n\nPara entregar: rode a coleção inteira no Runner, com a estufa ligada. A pasta *0* apaga o provisionamento e as subscrições, e as etapas recriam. Para recomeçar TUDO (inclusive histórico e painel): `docker compose down -v` e `docker compose up -d` na pasta `plataforma`.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "id": "581e46e5-1e5e-4bd3-aa28-daa15cbe7374",
+    "values": []
+  },
+  "globals": {
+    "id": "7464f3b5-8e60-470a-a445-3a6999f28694",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 10,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 6.666666666666667,
+      "responseMin": 2,
+      "responseMax": 19,
+      "responseSd": 5.647024782032472,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1794496924981,
+      "completed": 1794496925546
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 6,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "a5d17c38-da44-4ac7-8100-ce0f4d3c945e",
+          "httpRequestId": "bfb2b6c0-99c3-46d5-aaeb-72f6b6972d5d"
+        },
+        "item": {
+          "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+          "name": "1.1 [Verificação] Orion no ar",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{orion}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "77123a9e-ff91-47f8-989e-3666b9044415",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Orion 4.5.0\", () => pm.expect(pm.response.json().orion.version).to.eql(\"4.5.0\"));"
+                ],
+                "_lastExecutionId": "ef80d45e-cf01-43f6-b8a4-3101b11a255c"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "1026",
+            "path": [
+              "version"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "4b4a22a4-feb3-4b49-9113-5ad673a05822",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:1026",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "b23860e9-49b5-410b-9406-a61cb2a7a776",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+            },
+            {
+              "key": "Fiware-Correlator",
+              "value": "d13048fa-deac-11f1-8103-4e8d72899d9d"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "375"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              34,
+              111,
+              114,
+              105,
+              111,
+              110,
+              34,
+              32,
+              58,
+              32,
+              123,
+              10,
+              32,
+              32,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              32,
+              58,
+              32,
+              34,
+              52,
+              46,
+              53,
+              46,
+              48,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              117,
+              112,
+              116,
+              105,
+              109,
+              101,
+              34,
+              32,
+              58,
+              32,
+              34,
+              48,
+              32,
+              100,
+              44,
+              32,
+              48,
+              32,
+              104,
+              44,
+              32,
+              55,
+              32,
+              109,
+              44,
+              32,
+              56,
+              32,
+              115,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              103,
+              105,
+              116,
+              95,
+              104,
+              97,
+              115,
+              104,
+              34,
+              32,
+              58,
+              32,
+              34,
+              55,
+              99,
+              97,
+              57,
+              49,
+              51,
+              50,
+              55,
+              97,
+              53,
+              54,
+              55,
+              53,
+              52,
+              57,
+              51,
+              48,
+              54,
+              54,
+              53,
+              53,
+              48,
+              50,
+              49,
+              56,
+              97,
+              53,
+              49,
+              48,
+              51,
+              100,
+              52,
+              54,
+              100,
+              102,
+              57,
+              57,
+              100,
+              57,
+              56,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              111,
+              109,
+              112,
+              105,
+              108,
+              101,
+              95,
+              116,
+              105,
+              109,
+              101,
+              34,
+              32,
+              58,
+              32,
+              34,
+              84,
+              117,
+              101,
+              32,
+              65,
+              112,
+              114,
+              32,
+              49,
+              52,
+              32,
+              49,
+              48,
+              58,
+              50,
+              51,
+              58,
+              51,
+              53,
+              32,
+              85,
+              84,
+              67,
+              32,
+              50,
+              48,
+              50,
+              54,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              111,
+              109,
+              112,
+              105,
+              108,
+              101,
+              100,
+              95,
+              98,
+              121,
+              34,
+              32,
+              58,
+              32,
+              34,
+              114,
+              111,
+              111,
+              116,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              111,
+              109,
+              112,
+              105,
+              108,
+              101,
+              100,
+              95,
+              105,
+              110,
+              34,
+              32,
+              58,
+              32,
+              34,
+              98,
+              117,
+              105,
+              108,
+              100,
+              107,
+              105,
+              116,
+              115,
+              97,
+              110,
+              100,
+              98,
+              111,
+              120,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              114,
+              101,
+              108,
+              101,
+              97,
+              115,
+              101,
+              95,
+              100,
+              97,
+              116,
+              101,
+              34,
+              32,
+              58,
+              32,
+              34,
+              84,
+              117,
+              101,
+              32,
+              65,
+              112,
+              114,
+              32,
+              49,
+              52,
+              32,
+              49,
+              48,
+              58,
+              50,
+              51,
+              58,
+              51,
+              53,
+              32,
+              85,
+              84,
+              67,
+              32,
+              50,
+              48,
+              50,
+              54,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              109,
+              97,
+              99,
+              104,
+              105,
+              110,
+              101,
+              34,
+              32,
+              58,
+              32,
+              34,
+              120,
+              56,
+              54,
+              95,
+              54,
+              52,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              100,
+              111,
+              99,
+              34,
+              32,
+              58,
+              32,
+              34,
+              104,
+              116,
+              116,
+              112,
+              115,
+              58,
+              47,
+              47,
+              102,
+              105,
+              119,
+              97,
+              114,
+              101,
+              45,
+              111,
+              114,
+              105,
+              111,
+              110,
+              46,
+              114,
+              116,
+              102,
+              100,
+              46,
+              105,
+              111,
+              47,
+              101,
+              110,
+              47,
+              52,
+              46,
+              53,
+              46,
+              48,
+              47,
+              34,
+              10,
+              125,
+              10,
+              125,
+              10
+            ]
+          },
+          "cookie": [],
+          "responseTime": 19,
+          "responseSize": 375
+        },
+        "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+        "assertions": [
+          {
+            "assertion": "Status 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Orion 4.5.0",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "1cf2f8fa-b4c1-40fb-b369-cb0c4b5b4cdb",
+          "length": 6,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "ab611586-8122-45ee-9cd3-674d942b72a9"
+        },
+        "item": {
+          "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+          "name": "1.2 [Verificação] IoT Agent no ar",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "path": [
+                "iot",
+                "about"
+              ],
+              "host": [
+                "{{iotagent}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8ddb07a3-7ff9-4dfa-8622-eb14299d6eaf",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"IoT Agent JSON 3.14.0\", () => pm.expect(pm.response.json().version).to.eql(\"3.14.0\"));"
+                ],
+                "_lastExecutionId": "2b7d5427-e94e-4fc3-abe9-680f02e3e9a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "4041",
+            "path": [
+              "iot",
+              "about"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "6d44d000-04e9-4fa4-bbad-7ea2e504b1b4",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:4041",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "4df80651-d286-4ec0-a172-ddce15f702d4",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Fiware-Correlator",
+              "value": "d2ab46a4-5fd2-414c-a780-7742fd79ed51"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "71"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"47-3CTrkH+GWX22bg+pyXJwHecDImY\""
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              108,
+              105,
+              98,
+              86,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              52,
+              46,
+              49,
+              52,
+              46,
+              48,
+              34,
+              44,
+              34,
+              112,
+              111,
+              114,
+              116,
+              34,
+              58,
+              34,
+              52,
+              48,
+              52,
+              49,
+              34,
+              44,
+              34,
+              98,
+              97,
+              115,
+              101,
+              82,
+              111,
+              111,
+              116,
+              34,
+              58,
+              34,
+              47,
+              34,
+              44,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              51,
+              46,
+              49,
+              52,
+              46,
+              48,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 71
+        },
+        "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+        "assertions": [
+          {
+            "assertion": "Status 200",
+            "skipped": false
+          },
+          {
+            "assertion": "IoT Agent JSON 3.14.0",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "bd3aba16-483a-4060-88ba-e04a86e02a27",
+          "length": 6,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "4497f192-7904-4d90-a83c-68682db530b4"
+        },
+        "item": {
+          "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+          "name": "1.3 [Verificação] Cygnus no ar",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "path": [
+                "v1",
+                "version"
+              ],
+              "host": [
+                "{{cygnus}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "21a7f18e-b4c5-49bf-a6ab-7f6b86c93198",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+                ],
+                "_lastExecutionId": "4dc3004e-45b9-420b-97ad-1c6351a62f1d"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5080",
+            "path": [
+              "v1",
+              "version"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "0d66d5c9-3585-4714-83a7-bcf52d3ab657",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:5080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "9892926e-dab3-471c-befe-bf2281434317",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "79"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(6.1.x)"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              115,
+              117,
+              99,
+              99,
+              101,
+              115,
+              115,
+              34,
+              58,
+              34,
+              116,
+              114,
+              117,
+              101,
+              34,
+              44,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              51,
+              46,
+              49,
+              54,
+              46,
+              48,
+              46,
+              49,
+              53,
+              53,
+              99,
+              50,
+              99,
+              100,
+              49,
+              98,
+              98,
+              97,
+              98,
+              54,
+              52,
+              52,
+              52,
+              56,
+              51,
+              56,
+              97,
+              57,
+              51,
+              57,
+              51,
+              102,
+              49,
+              51,
+              53,
+              97,
+              48,
+              102,
+              99,
+              48,
+              52,
+              49,
+              97,
+              102,
+              55,
+              57,
+              102,
+              34,
+              125,
+              10
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 79
+        },
+        "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+        "assertions": [
+          {
+            "assertion": "Status 200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "edaa3591-b931-4775-935c-862c146c2e81",
+          "length": 6,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "9453036a-b30e-484f-bdf9-ae0e5b65feb2"
+        },
+        "item": {
+          "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+          "name": "1.4 [Verificação] Grafana no ar",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "path": [
+                "api",
+                "health"
+              ],
+              "host": [
+                "{{grafana}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5c7cba76-f256-49ba-9699-29ea78204e20",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Banco do Grafana ok\", () => pm.expect(pm.response.json().database).to.eql(\"ok\"));"
+                ],
+                "_lastExecutionId": "20689145-7cf5-4f91-9e3a-1f45c0d77c5d"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "health"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "58e25b60-8972-4fa3-a175-d52712c382de",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "850a3508-dd99-4582-a81b-4386a5a0fcfc",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "deny"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "131"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              100,
+              97,
+              116,
+              97,
+              98,
+              97,
+              115,
+              101,
+              34,
+              58,
+              32,
+              34,
+              111,
+              107,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              32,
+              34,
+              49,
+              51,
+              46,
+              50,
+              46,
+              52,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              111,
+              109,
+              109,
+              105,
+              116,
+              34,
+              58,
+              32,
+              34,
+              48,
+              101,
+              55,
+              57,
+              97,
+              101,
+              102,
+              57,
+              100,
+              57,
+              49,
+              97,
+              98,
+              102,
+              51,
+              98,
+              100,
+              97,
+              100,
+              97,
+              101,
+              57,
+              97,
+              102,
+              49,
+              53,
+              55,
+              54,
+              51,
+              48,
+              50,
+              57,
+              48,
+              55,
+              50,
+              102,
+              98,
+              52,
+              53,
+              98,
+              34,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 6,
+          "responseSize": 101
+        },
+        "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+        "assertions": [
+          {
+            "assertion": "Status 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Banco do Grafana ok",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8de7f718-dad1-4c9b-a337-55952f1106cb",
+          "length": 6,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "6350d7c4-be80-45ac-a456-41e4514ca2fc"
+        },
+        "item": {
+          "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+          "name": "1.5 [Verificação] Consumidor no ar",
+          "request": {
+            "url": {
+              "protocol": "http",
+              "path": [],
+              "host": [
+                "{{consumidor}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0d9aaabe-ef86-4cb2-8e16-57241e470b2f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+                ],
+                "_lastExecutionId": "4188ffc1-6a21-465e-ba6f-3878006aeb73"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3001",
+            "path": [
+              ""
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ba4c8cda-e074-4a53-8bc0-c6a20a9ec46a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3001",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "b3ebb9e5-a82b-4fc8-9467-2f0023b3b525",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Server",
+              "value": "BaseHTTP/0.6 Python/3.12.16"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "50"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              115,
+              101,
+              114,
+              118,
+              105,
+              99,
+              111,
+              34,
+              58,
+              32,
+              34,
+              99,
+              111,
+              110,
+              115,
+              117,
+              109,
+              105,
+              100,
+              111,
+              114,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              110,
+              111,
+              116,
+              105,
+              102,
+              105,
+              99,
+              97,
+              99,
+              111,
+              101,
+              115,
+              34,
+              58,
+              32,
+              48,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 50
+        },
+        "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+        "assertions": [
+          {
+            "assertion": "Status 200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2377f94e-eea7-4410-a62a-5265fcee73cc",
+          "length": 6,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "4deb0574-62fc-4aa9-b5a2-f4fb0a1ef862"
+        },
+        "item": {
+          "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+          "name": "1.6 [Verificação] Variável apikey preenchida",
+          "request": {
+            "description": {
+              "content": "Edite as variáveis da coleção: `apikey` deve ser a **mesma** API key usada na ponte (`mosquitto/mosquitto.conf`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "http",
+              "path": [
+                "iot",
+                "about"
+              ],
+              "host": [
+                "{{iotagent}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1d8361b9-c25a-4076-b914-7776f6a14b96",
+                "type": "text/javascript",
+                "exec": [
+                  "const k = pm.collectionVariables.get(\"apikey\");",
+                  "pm.test(\"apikey com 4 a 24 letras e números\", () => pm.expect(k).to.match(/^[A-Za-z0-9]{4,24}$/));",
+                  "pm.test(\"apikey diferente do valor de exemplo\", () => pm.expect(k).to.not.eql(\"troqueesteid\"));"
+                ],
+                "_lastExecutionId": "6f0e0c5f-338a-4c9a-86ea-d02c314f0d83"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Edite as variáveis da coleção: `apikey` deve ser a **mesma** API key usada na ponte (`mosquitto/mosquitto.conf`).",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "4041",
+            "path": [
+              "iot",
+              "about"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5a7c6fcc-9648-44cf-b9cb-888c1cbdbd24",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:4041",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "b9b87586-ca3b-473c-a059-3fdd46bfabaa",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Fiware-Correlator",
+              "value": "b63bb828-2fd0-49d3-b3c6-f722c0837eba"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "71"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"47-3CTrkH+GWX22bg+pyXJwHecDImY\""
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              108,
+              105,
+              98,
+              86,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              52,
+              46,
+              49,
+              52,
+              46,
+              48,
+              34,
+              44,
+              34,
+              112,
+              111,
+              114,
+              116,
+              34,
+              58,
+              34,
+              52,
+              48,
+              52,
+              49,
+              34,
+              44,
+              34,
+              98,
+              97,
+              115,
+              101,
+              82,
+              111,
+              111,
+              116,
+              34,
+              58,
+              34,
+              47,
+              34,
+              44,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              51,
+              46,
+              49,
+              52,
+              46,
+              48,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 71
+        },
+        "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+        "assertions": [
+          {
+            "assertion": "apikey com 4 a 24 letras e números",
+            "skipped": false
+          },
+          {
+            "assertion": "apikey diferente do valor de exemplo",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 777
+    },
+    "failures": [],
+    "error": null
+  }
+}
