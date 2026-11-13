@@ -5,7 +5,7 @@
 **Device ID:** `estufa2604`  
 **Entidade NGSI-v2:** `urn:ngsi-ld:Greenhouse:001` (`Greenhouse`)  
 **FIWARE-Service / ServicePath:** `fei` / `/estufa`  
-**Integrantes e RAs:** preencher com os dados reais do grupo.
+**Integrantes e RAs:** Lucas Belo Gaspardo 22.224.007-9.
 
 Este README reúne a identificação, arquitetura, instruções de conexão, decisões e respostas R1–R8. O relatório técnico completo também está em `relatorio.pdf`.
 
