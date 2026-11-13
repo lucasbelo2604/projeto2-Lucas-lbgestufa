@@ -5,7 +5,7 @@
     },
     "item": [
       {
-        "id": "6e176ca6-1d46-4d0f-9d35-4a75b5dc9959",
+        "id": "7ee7b75b-2662-4eb5-bf50-5fd8efd98344",
         "name": "0 - Recomeçar do zero [Pronto]",
         "description": {
           "content": "Apaga subscrições, dispositivo, entidade e grupo do seu caminho. O histórico do MySQL e o painel permanecem. Rode a coleção inteira no Runner (começando por aqui) para provar que tudo funciona a partir do zero. Reset completo (contêineres e volumes, inclusive histórico e painel): `docker compose down -v` na pasta `plataforma`.",
@@ -13,7 +13,7 @@
         },
         "item": [
           {
-            "id": "1f9d93bb-bc6d-4365-9bf9-172e731a285c",
+            "id": "af21013c-c43a-4c19-a2c6-6f70b05885c6",
             "name": "0.1 Apaga as subscrições do caminho",
             "request": {
               "description": {
@@ -49,7 +49,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "8da4f723-64b7-4821-a92c-18649f9e1cc4",
+                  "id": "7a1c7fdf-74d7-4617-90d5-7a03ca3c5082",
                   "type": "text/javascript",
                   "exec": [
                     "const subs = pm.response.json();",
@@ -62,7 +62,7 @@
             ]
           },
           {
-            "id": "0c135a7a-4fa3-4d40-8c94-6af890e004ce",
+            "id": "fa7808b9-fa00-47a3-93cb-53c3fcea3140",
             "name": "0.2 Apaga o dispositivo",
             "request": {
               "url": {
@@ -95,7 +95,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "383c2316-86e8-48f7-bd04-437e8efba9c0",
+                  "id": "5da00261-5d1b-46f1-a9f9-11a219510bb1",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -105,7 +105,7 @@
             ]
           },
           {
-            "id": "4f9b013a-9bc6-43b2-a68e-5ef612ebc3e0",
+            "id": "0c9c62f0-92dd-42b5-b075-bbc4a8ef3e8d",
             "name": "0.3 Apaga a entidade",
             "request": {
               "url": {
@@ -138,7 +138,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ff9f9d4a-cf95-4884-872c-63a1e107aa46",
+                  "id": "76c38737-f0d0-45be-afdf-19d66953c577",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -148,7 +148,7 @@
             ]
           },
           {
-            "id": "dca745e0-818f-4797-bbdd-a3904b38a063",
+            "id": "c4ed287f-9188-42b0-bc1a-cbba0ee11899",
             "name": "0.4 Apaga o grupo",
             "request": {
               "url": {
@@ -189,7 +189,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "c553c29f-5946-4d7a-9eda-23480cb0b611",
+                  "id": "3d5ab8e8-8e67-4459-beca-6d618d5523c4",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -202,7 +202,7 @@
         "event": []
       },
       {
-        "id": "03bd84c6-026f-4646-9a8a-441f9a39d91c",
+        "id": "d28cc4b3-aeef-4029-83ff-0f34a760f01e",
         "name": "Etapa 1 - Ambiente",
         "description": {
           "content": "Verificações prontas: o ambiente de `plataforma/docker-compose.yml` está no ar.",
@@ -210,7 +210,7 @@
         },
         "item": [
           {
-            "id": "eec7a13d-5804-4a17-b08c-c01f8258c7db",
+            "id": "07885ce8-2f91-442a-a2b8-4a0cd6f77fac",
             "name": "1.1 [Verificação] Orion no ar",
             "request": {
               "url": {
@@ -231,7 +231,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e40ad62a-26ce-4041-985a-4ade27036b27",
+                  "id": "9e1fb137-c409-413c-94c4-fcd73173699f",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -242,7 +242,7 @@
             ]
           },
           {
-            "id": "c5291361-d43d-4707-8d35-bb5eec392af2",
+            "id": "20881d28-df99-4086-921c-9538c7821bce",
             "name": "1.2 [Verificação] IoT Agent no ar",
             "request": {
               "url": {
@@ -264,7 +264,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "eda968b1-c403-46b2-aa92-f7c89984bbfa",
+                  "id": "28bece12-132d-4421-abaf-6c6582d7db18",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -275,7 +275,7 @@
             ]
           },
           {
-            "id": "b8f8f6c9-0fdb-429b-bd50-f02a9589edc4",
+            "id": "951f0371-389e-42b7-9725-fdca01c213d7",
             "name": "1.3 [Verificação] Cygnus no ar",
             "request": {
               "url": {
@@ -297,7 +297,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6a48849a-a05b-40e2-9685-609de7794bac",
+                  "id": "87742e61-431d-4f7c-92ff-ce108eb3c02c",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
@@ -307,7 +307,7 @@
             ]
           },
           {
-            "id": "947ccf83-0a16-460d-9e73-ffd5f9cd7a85",
+            "id": "33367a0b-09c8-4463-88d4-4790ca08a7c2",
             "name": "1.4 [Verificação] Grafana no ar",
             "request": {
               "url": {
@@ -329,7 +329,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "13bd5bc3-a61d-4541-94c1-96b153d605d8",
+                  "id": "e50bf52a-4b9d-485c-babe-3cc1d2fe8b65",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -340,7 +340,7 @@
             ]
           },
           {
-            "id": "d87464e7-8fa2-4937-8ed2-933045c13427",
+            "id": "c52d8538-ec1e-487b-9009-b307a115fa2b",
             "name": "1.5 [Verificação] Consumidor no ar",
             "request": {
               "url": {
@@ -359,7 +359,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e5a4e473-7084-4ee2-b96f-05f40fbae8ac",
+                  "id": "6e5c5cb6-e339-4393-83a7-bae659927bee",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
@@ -369,7 +369,7 @@
             ]
           },
           {
-            "id": "567535c1-fc48-4f7c-914c-1635918eb9a9",
+            "id": "00b6d8e2-1a5c-4fd3-ab0a-1306c835123f",
             "name": "1.6 [Verificação] Variável apikey preenchida",
             "request": {
               "description": {
@@ -395,7 +395,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "3a95293e-178b-4b58-8a2a-86d3be5bc92c",
+                  "id": "f32c13dc-8399-4786-aa84-52c135106111",
                   "type": "text/javascript",
                   "exec": [
                     "const k = pm.collectionVariables.get(\"apikey\");",
@@ -410,7 +410,7 @@
         "event": []
       },
       {
-        "id": "01522851-7d1b-4862-bb9c-21b9553377f6",
+        "id": "e6fa913e-5ab0-4c2a-910b-e1a361d647ba",
         "name": "Etapa 2 - Provisionamento",
         "description": {
           "content": "Grupo, dispositivo e o registro que o IoT Agent cria no Orion.",
@@ -418,11 +418,11 @@
         },
         "item": [
           {
-            "id": "c4fe85fe-7da9-428f-866b-aba672c0d945",
-            "name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+            "id": "8b311914-596c-4827-8dd4-6c7157a718ca",
+            "name": "2.1 Grupo de serviço lbgestufa",
             "request": {
               "description": {
-                "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -467,7 +467,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b0ff5da6-1de7-4743-b4d3-eb02be10bc9e",
+                  "id": "2d3f4655-6558-4e80-90d9-22bd84fdcf57",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"201 Created (ou 409 se o grupo já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -482,17 +482,17 @@
                     "  pm.test(\"Dispositivos não provisionados são rejeitados\", () => pm.expect(g.autoprovision).to.eql(false));",
                     "});"
                   ],
-                  "_lastExecutionId": "13589350-856e-464a-855d-86d7c17cabc2"
+                  "_lastExecutionId": "dc4c9f44-5b55-4070-bca5-a99437b14dd7"
                 }
               }
             ]
           },
           {
-            "id": "10982e55-7e66-4f59-be6e-656125be7414",
-            "name": "2.2 [Complete o corpo] Dispositivo da estufa",
+            "id": "66a58917-5708-4d69-82f4-7766f4536aeb",
+            "name": "2.2 Dispositivo estufa2604",
             "request": {
               "description": {
-                "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -537,7 +537,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "29fcb771-275a-4ab9-9197-b69fa01810e6",
+                  "id": "3c103f27-4d05-4a81-bd46-08c106555fd1",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"201 Created (ou 409 se já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -559,13 +559,13 @@
                     "  pm.test(\"Estático location (geo:json, Point)\", () => { const l = est.find(s => s.name === \"location\"); pm.expect(l).to.exist; pm.expect(l.type).to.eql(\"geo:json\"); pm.expect(l.value.type).to.eql(\"Point\"); });",
                     "});"
                   ],
-                  "_lastExecutionId": "fd3e4002-a05d-425d-931c-85f6cc6d7b7b"
+                  "_lastExecutionId": "d1fe31c7-9ea0-49b1-9322-386ee700ca3d"
                 }
               }
             ]
           },
           {
-            "id": "83639339-fd26-4b25-907c-e3f905bc99bc",
+            "id": "88d754e6-b4f8-407c-a84d-e3fe198a7058",
             "name": "2.3 [Pronto] Quem atende os comandos da estufa?",
             "request": {
               "description": {
@@ -601,7 +601,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7bbac350-2403-44ee-a156-59f8db8ea6a4",
+                  "id": "6aeaa52e-ca37-422a-9d92-fdedb04da900",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -611,13 +611,13 @@
                     "pm.test(\"Registro da entidade da estufa\", () => pm.expect(r).to.exist);",
                     "pm.test(\"Os 4 comandos são atendidos pelo IoT Agent\", () => { pm.expect(r, \"registro não encontrado\").to.exist; pm.expect(r.provider.http.url).to.match(/iot-agent:4041/); pm.expect(r.dataProvided.attrs).to.include.members([\"setRelay\", \"setServo\", \"setInterval\", \"setSending\"]); });"
                   ],
-                  "_lastExecutionId": "652a4d35-fc5b-41a2-9664-8900fc6dc704"
+                  "_lastExecutionId": "aa33b5db-80ea-4d68-9316-a6ecc79c5d7b"
                 }
               }
             ]
           },
           {
-            "id": "5738f1ee-ffbb-47bd-a419-45fbe2250bfe",
+            "id": "b0905ee0-3249-4357-8108-6d8fa1909170",
             "name": "2.4 [Verificação] A medida de teste chegou ao Orion",
             "request": {
               "description": {
@@ -659,19 +659,19 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "cf76e45f-5573-4d84-839f-17357cef14a0",
+                  "id": "1dace1f4-be7f-4743-8fb4-35db3bf20f85",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda uma medida (de teste ou do firmware)",
                     "setTimeout(() => {}, 6000);"
                   ],
-                  "_lastExecutionId": "f9c849f5-a179-4b76-9a1d-c0af27d9641b"
+                  "_lastExecutionId": "5f386614-e84f-460e-a3fe-0f128b0725b4"
                 }
               },
               {
                 "listen": "test",
                 "script": {
-                  "id": "192fd5b3-acce-4b91-b1e9-a9af573cd053",
+                  "id": "2665a706-152e-4379-b78e-bcb5496a2d36",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -679,7 +679,7 @@
                     "pm.test(\"Pelo menos uma medida numérica\", () => pm.expect([\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"].some(a => typeof e[a] === \"number\")).to.be.true);",
                     "pm.test(\"TimeInstant da medida\", () => pm.expect(e).to.have.property(\"TimeInstant\"));"
                   ],
-                  "_lastExecutionId": "26f6fcfb-9965-4f78-85c8-a239e698359c"
+                  "_lastExecutionId": "bd0dece5-98a6-4e95-88c3-04b22cb3fc5d"
                 }
               }
             ]
@@ -688,7 +688,7 @@
         "event": []
       },
       {
-        "id": "ef16dc9b-c79f-4064-ab03-282ae1a57258",
+        "id": "2a4b39c7-f260-4247-b255-fc7965dd54eb",
         "name": "Etapa 3 - Firmware e comandos",
         "description": {
           "content": "Medidas da estufa e os 4 comandos, sempre **pelo Orion**.",
@@ -696,7 +696,7 @@
         },
         "item": [
           {
-            "id": "8445f410-355d-4a32-8cf9-07fb1f91b234",
+            "id": "3bb4a4bc-d181-4ed6-9c15-090078b3589c",
             "name": "3.1 [Pronto] A estufa está publicando",
             "request": {
               "description": {
@@ -742,7 +742,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a6aecf8a-f414-45bf-823a-d82513a3c6ed",
+                  "id": "0df5eb18-1c5b-45a9-a17f-f22c3454c43e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -757,7 +757,7 @@
             ]
           },
           {
-            "id": "2c834f07-daeb-494c-b1b8-d1779bbcb0b8",
+            "id": "0000f48b-3d37-4d5f-89ea-c7c8904bca98",
             "name": "3.2 [Pronto] Ligue o relé",
             "request": {
               "description": {
@@ -808,7 +808,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0cee8cc0-357b-48d0-9b1a-6ccf741624a4",
+                  "id": "ff709336-dd1d-4baf-8949-2a199a88ff6d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -818,7 +818,7 @@
             ]
           },
           {
-            "id": "df7c635a-9b62-49ef-9a81-188afad3295c",
+            "id": "1f14bd49-96fd-461b-8b42-81423cb7405b",
             "name": "3.3 [Pronto] O relé ligou?",
             "request": {
               "description": {
@@ -864,7 +864,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "7b6c08bb-7221-4066-9013-f49cf31fa368",
+                  "id": "669125d3-b930-4460-86e8-77a163d645ab",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -875,7 +875,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "58bda53f-c7b9-49c4-9bc3-a1b29679f90d",
+                  "id": "0c722c5b-71bb-4f04-bf86-6bfd517aabb8",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -889,7 +889,7 @@
             ]
           },
           {
-            "id": "d4a9443a-2020-43c2-8eee-5f326cc00894",
+            "id": "e6f7b599-65e6-4e9c-af04-4c7bf27841b4",
             "name": "3.4 [Pronto] Abra a janela a 90°",
             "request": {
               "description": {
@@ -940,7 +940,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ba851650-05d3-489f-8eb9-1304668c4812",
+                  "id": "6b71697a-390f-40ea-b155-5fb77aae3f0f",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -950,7 +950,7 @@
             ]
           },
           {
-            "id": "3b26a4dc-b167-417f-bcd1-9fe695868c0f",
+            "id": "f68e4003-bd00-4795-acf5-1d2b5ba082cb",
             "name": "3.5 [Verificação] Janela a 90°",
             "request": {
               "url": {
@@ -992,7 +992,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "5307ae1b-ac31-446b-89af-39e5c3bc6f13",
+                  "id": "7afb9f94-2e08-4af3-8394-6821284a84c7",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1003,7 +1003,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "2f2dc6ee-0e09-494f-8d9d-dc0e06f82bad",
+                  "id": "ba5f0e10-51a4-440b-878c-039164227761",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1016,7 +1016,7 @@
             ]
           },
           {
-            "id": "67095632-9015-49be-880d-b25a9f4161b2",
+            "id": "66567ec4-a7c0-414a-be70-a4c888bebfe5",
             "name": "3.6 [Pronto] Comando inválido: janela a 200°",
             "request": {
               "description": {
@@ -1067,7 +1067,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "1e546c42-9af3-4c9a-8467-ee358ba4b447",
+                  "id": "1db2a197-1833-4252-a9d8-13c3ae96406d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1077,7 +1077,7 @@
             ]
           },
           {
-            "id": "79ba5120-2c28-4273-ad00-ca1d3e20f8f3",
+            "id": "7995dc7b-f80c-4182-940c-9027e157ca38",
             "name": "3.7 [Pronto] A estufa recusou?",
             "request": {
               "description": {
@@ -1123,7 +1123,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "00055a85-5331-4aa3-ac16-aa425112ec2a",
+                  "id": "93a4c48f-47e4-413f-a54f-3763b3bc60fa",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1134,7 +1134,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4f09d391-4d3d-4839-8296-0b9668aeb051",
+                  "id": "ab3db656-1660-445b-baad-d00d7f70dad7",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1147,7 +1147,7 @@
             ]
           },
           {
-            "id": "9f038d5b-e684-458d-b8ae-c811c08f5b68",
+            "id": "c23e8838-6dd0-41d3-8a38-1b2813429181",
             "name": "3.8 [Pronto] Colete a cada 5 s",
             "request": {
               "description": {
@@ -1198,7 +1198,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5df1da59-7f73-4e36-acf0-325c8cb7f231",
+                  "id": "09356bfb-28b3-46f0-a97d-79efeee7f54e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1208,7 +1208,7 @@
             ]
           },
           {
-            "id": "28e430e9-9c59-4cd3-985d-2a5d8b7ac62d",
+            "id": "b00a8f95-3817-4f30-aee9-3ed6a2f0040e",
             "name": "3.9 [Verificação] Intervalo de 5 s",
             "request": {
               "url": {
@@ -1250,7 +1250,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "9937ade7-c41b-4d24-93f7-040e6b4a0307",
+                  "id": "5bf21529-a36e-4cd3-a40b-cc652d1da6a3",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1261,7 +1261,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7413f797-3850-47d6-8c94-78fa1ec87d84",
+                  "id": "50332470-cb31-423a-82d2-0fb76737e00d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1274,7 +1274,7 @@
             ]
           },
           {
-            "id": "9c864b55-adb8-41f1-9413-158628a18542",
+            "id": "c3b3145b-b055-4992-82ca-4bd1eb313bd4",
             "name": "3.10 [Pronto] Intervalo inválido: 30 s",
             "request": {
               "description": {
@@ -1325,7 +1325,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ba10cbf3-4f03-4207-b1dc-1336ab041224",
+                  "id": "0e0409fe-c281-4a5b-ba43-8f3c90d59a8c",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1335,7 +1335,7 @@
             ]
           },
           {
-            "id": "2042c3ff-61bd-4a6b-bc52-5aa207e1d93e",
+            "id": "1061279d-255a-46d4-a247-6ff428c5b24b",
             "name": "3.11 [Verificação] Intervalo preservado",
             "request": {
               "url": {
@@ -1377,7 +1377,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "99a2c72d-c349-4368-9aa4-4d74db84c8e3",
+                  "id": "a006b82f-518a-4c0d-be99-cbb2f9180c69",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1388,7 +1388,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7668b2e6-64f9-4505-84ed-413be7cfba22",
+                  "id": "213fa899-feca-4e74-b2c4-2da73ec62656",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1401,7 +1401,7 @@
             ]
           },
           {
-            "id": "6f0b4aac-0030-47de-ac9f-2d35f4e93de6",
+            "id": "038f1b2b-2ef1-4814-99b8-50ee3cddcd8c",
             "name": "3.12 [Pronto] Desative o envio",
             "request": {
               "description": {
@@ -1452,7 +1452,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "c486ef86-c168-4ca4-aa58-3756ce3fe280",
+                  "id": "e74ff3ac-8a34-4b8e-af88-292d2e767073",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1462,7 +1462,7 @@
             ]
           },
           {
-            "id": "95baf431-9db8-47c5-aa04-db3b36ee1c85",
+            "id": "6fa22b28-4b47-4be4-9517-227b4ec49fe0",
             "name": "3.13 [Verificação] Envio desativado",
             "request": {
               "description": {
@@ -1501,7 +1501,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "13f381ea-61a7-445c-8ac9-3580a0712ff0",
+                  "id": "4829cfe1-c573-4b68-bdc5-1eb2ef643c3c",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1512,7 +1512,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5968fbc2-c5ce-4b49-8187-e36488538b10",
+                  "id": "b0d49201-6873-446e-ba94-6d631b1eb496",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1529,7 +1529,7 @@
             ]
           },
           {
-            "id": "76ff6a91-1945-47cc-9f85-73d1cbd2dd66",
+            "id": "2a37a475-c507-44a0-80e3-0a457b5ed008",
             "name": "3.14 [Pronto] Reative o envio",
             "request": {
               "description": {
@@ -1580,7 +1580,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ab75005c-2ab4-4233-a003-86bdaa4dbf90",
+                  "id": "314cddde-d7c2-4ac4-81fa-ac1d6dccb1a0",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1590,7 +1590,7 @@
             ]
           },
           {
-            "id": "25b5250f-0b6d-4d64-9f4a-a654a12b0107",
+            "id": "1d8746d5-1c6e-4a03-8a0f-5b6147f44d4d",
             "name": "3.15 [Verificação] Envio reativado",
             "request": {
               "url": {
@@ -1625,7 +1625,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "c456d979-9057-4e9e-9dbc-2eb5205b03d2",
+                  "id": "97f565ca-1968-4b2e-98f7-2c1007295ba3",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda pelo menos uma medida no intervalo de 5 s",
@@ -1636,7 +1636,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "d68758a9-4c61-4cbb-a04a-8f965f24bcad",
+                  "id": "27a39ca7-6d92-41b1-8e7a-aca22fd0e642",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1651,7 +1651,7 @@
         "event": []
       },
       {
-        "id": "b9cf6ce5-2a2d-45da-99ae-e20af8ae47a6",
+        "id": "935cea7c-cdc2-404d-899f-f1478d0c8206",
         "name": "Etapa 4 - Subscrições, histórico e painel",
         "description": {
           "content": "Alerta, Cygnus/MySQL e o painel do Grafana.",
@@ -1659,11 +1659,11 @@
         },
         "item": [
           {
-            "id": "f20b5a9f-3de1-4053-933d-c33cc456dcce",
-            "name": "4.1 [Complete o corpo] Subscrição do histórico (Cygnus)",
+            "id": "0715dca6-183d-4ced-b38a-3d6444a61660",
+            "name": "4.1 Subscrição de histórico (Cygnus)",
             "request": {
               "description": {
-                "content": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -1708,7 +1708,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "03e8577b-dfd9-4019-8cf0-aca5f250d491",
+                  "id": "e0570e13-ae76-4d32-b7fc-73529c0f1b73",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
@@ -1721,7 +1721,7 @@
             ]
           },
           {
-            "id": "6f28d431-2c14-40c5-8c18-2b6ac62e908e",
+            "id": "305bf223-f672-45d6-b652-947f1a07c419",
             "name": "4.2 [Verificação] Subscrição do histórico entregando",
             "request": {
               "url": {
@@ -1754,7 +1754,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "58d9d33b-6fa5-4ba5-82be-9d7ded2096a1",
+                  "id": "df2c269b-9b1b-4937-9cad-7183aaee0435",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda algumas notificações",
@@ -1765,7 +1765,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6668c361-4ff7-4ecf-a41a-c9e694977ba1",
+                  "id": "e73c506c-449b-49f9-a32b-da930ea8e94d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1780,7 +1780,7 @@
             ]
           },
           {
-            "id": "08007fa6-17d8-425e-aca3-c1eb3806193a",
+            "id": "3dd7a71b-0541-446f-ba77-6c2f62d5ea0f",
             "name": "4.3 [Verificação] O Cygnus está recebendo",
             "request": {
               "url": {
@@ -1802,7 +1802,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4942b784-619d-4b20-a5a6-833d7695a9c3",
+                  "id": "ae742b2b-d193-483f-852f-2423888b3dde",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1813,11 +1813,11 @@
             ]
           },
           {
-            "id": "43f37bb1-5ae5-4d05-9aad-c8229a0022a8",
-            "name": "4.4 [Complete o corpo] Notificação de solo seco (serviço externo)",
+            "id": "4d0103e4-4ff6-4986-94c8-3440c40146c8",
+            "name": "4.4 Alerta de solo seco (consumidor)",
             "request": {
               "description": {
-                "content": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -1862,7 +1862,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a6d086a8-ab9b-4465-8d63-91a494dd3d96",
+                  "id": "6c154d51-433e-452c-bfa8-f1dc5d0feb46",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
@@ -1874,7 +1874,7 @@
             ]
           },
           {
-            "id": "07409d3a-9f69-4a8f-9dac-c11876118908",
+            "id": "e288f78b-f5e6-48e6-a7c3-9f98e012579a",
             "name": "4.5 [Verificação] Subscrição de alerta",
             "request": {
               "url": {
@@ -1907,7 +1907,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e048a323-a739-4b12-8df6-d3c499645de8",
+                  "id": "b3c860f3-c5ee-4866-bd3f-c09097606221",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1923,7 +1923,7 @@
             ]
           },
           {
-            "id": "07e69066-0231-4fb5-94d2-5f68f1a50a65",
+            "id": "c141c1ed-09f9-41da-aa9a-5c56042de97e",
             "name": "4.6 [Pronto] Limpa o consumidor",
             "request": {
               "url": {
@@ -1944,7 +1944,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0d967f15-8749-452b-b1b9-de225f099574",
+                  "id": "cbb32137-baad-4ff1-9195-f280abdc410d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
@@ -1954,7 +1954,7 @@
             ]
           },
           {
-            "id": "4e99092e-d017-4b3f-8119-96a70e52d590",
+            "id": "d2e10649-648a-4825-99d2-5383920e7bf2",
             "name": "4.7 [Pronto] Simula uma medida de solo seco (HTTP)",
             "request": {
               "description": {
@@ -2004,7 +2004,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "1bb9e828-59be-4af8-a609-63e99ed45a12",
+                  "id": "9eae2470-38a3-4ecc-aacb-95e2b6f52fbd",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Medida aceita\", () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));"
@@ -2014,7 +2014,7 @@
             ]
           },
           {
-            "id": "4655d717-6dcc-4957-94c7-0237ac33e5bd",
+            "id": "870fbfd3-43f4-41a0-8703-2ca33be517f4",
             "name": "4.8 [Verificação] Alerta recebido",
             "request": {
               "url": {
@@ -2040,7 +2040,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "281326e7-d1cf-4985-9436-94a8646ecb28",
+                  "id": "5030a7ef-c82f-4ff5-9054-15b9f2fbae13",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a notificação",
@@ -2051,7 +2051,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6a1cd4f8-37c6-4fe2-8e97-a81cb724b880",
+                  "id": "4739a91c-49e8-4681-b9a6-cd37de23300b",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2064,7 +2064,7 @@
             ]
           },
           {
-            "id": "1e8bd4bf-be18-4467-bdbc-b9a09a1cca22",
+            "id": "88bfd91d-db4a-4949-a804-fd7ab6205417",
             "name": "4.9 [Verificação] Fonte de dados MySQL",
             "request": {
               "url": {
@@ -2101,7 +2101,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "722fd521-9177-4e69-ab38-8363d6159cb0",
+                  "id": "af7fd328-f41e-4a9d-8a55-ac5a1edd3430",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2119,7 +2119,7 @@
             ]
           },
           {
-            "id": "1a97f878-9cb2-4cdf-92f1-51c0a2b37496",
+            "id": "833c431e-6e18-45ef-830c-9fc3ceb2360a",
             "name": "4.10 [Verificação] Save & test",
             "request": {
               "url": {
@@ -2159,7 +2159,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b83bb054-4166-4d9b-982d-67ef88b7a62a",
+                  "id": "0ee8bc43-aae3-45c4-a125-379876896a34",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2170,7 +2170,7 @@
             ]
           },
           {
-            "id": "9b2f7964-4ac5-45fd-b91d-e48df09ee4c9",
+            "id": "2265d29f-1df0-427d-b1ce-2760db36fc4e",
             "name": "4.11 [Verificação] Histórico da estufa no MySQL",
             "request": {
               "description": {
@@ -2227,7 +2227,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "50057f17-912f-4cc4-9944-84de8ea8e2e6",
+                  "id": "896336df-1ea6-4270-860c-7fc1eed5c789",
                   "type": "text/javascript",
                   "exec": [
                     "const r = pm.response.json().results.A;",
@@ -2242,7 +2242,7 @@
             ]
           },
           {
-            "id": "6bff3a6f-77d3-4493-bd7e-e3165f998dc5",
+            "id": "44ddf045-ba55-49f4-9e76-ad6203e0ade9",
             "name": "4.12 [Verificação] Painel \"Estufa inteligente\" existe",
             "request": {
               "url": {
@@ -2288,7 +2288,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "554ddde1-19af-405d-8024-95070e04d0f8",
+                  "id": "514fb74c-7ef3-4048-9606-dce9f6e1e55b",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2301,7 +2301,7 @@
             ]
           },
           {
-            "id": "8371b665-43b4-4db8-ba2a-b6dab21bf00a",
+            "id": "9471ab43-b2dd-46c9-9bc1-f6f5e58b14b7",
             "name": "4.13 [Verificação] Conteúdo do painel",
             "request": {
               "url": {
@@ -2340,7 +2340,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "2db66a04-a902-4f68-9e14-aaebbc60354c",
+                  "id": "baa2d79a-cf90-4b41-b814-4b35782a8651",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2457,17 +2457,17 @@
       "name": "CCM520 - Projeto 2 - Estufa na plataforma FIWARE (template)",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "description": {
-        "content": "Projeto 2 - Estufa inteligente na plataforma FIWARE: a estufa no broker público broker.hivemq.com e uma ponte até o Mosquitto local.\n\nSiga o guia passo a passo. Você define a variável `apikey` e escreve o **corpo** de 4 requisições, marcadas com **[Complete o corpo]**: 2.1 (grupo de serviço), 2.2 (dispositivo), 4.1 (subscrição do Cygnus) e 4.4 (notificação para o serviço externo). Todas as outras requisições ([Pronto] e [Verificação]) já estão prontas.\n\nPara entregar: rode a coleção inteira no Runner, com a estufa ligada. A pasta *0* apaga o provisionamento e as subscrições, e as etapas recriam. Para recomeçar TUDO (inclusive histórico e painel): `docker compose down -v` e `docker compose up -d` na pasta `plataforma`.",
+        "content": "Coleção personalizada para a estufa lbgestufa / estufa2604. Os corpos, variáveis do grupo e URLs do ambiente local já estão configurados. Execute as pastas na ordem; a pasta 0 limpa e recria o provisionamento e as subscrições. As variáveis de IDs de subscrição e painel são preenchidas automaticamente pelas requisições correspondentes.",
         "type": "text/plain"
       }
     }
   },
   "environment": {
-    "id": "59d23d71-ec1d-409b-b64e-0e6c34efd36d",
+    "id": "c79f6e8c-c1ff-47c8-88c0-2da2797e2979",
     "values": []
   },
   "globals": {
-    "id": "73028b76-380d-4739-8fd5-fe98e9f6c963",
+    "id": "46d1b3bf-ff79-41de-921b-5036f6fa294b",
     "values": []
   },
   "run": {
@@ -2519,10 +2519,10 @@
       }
     },
     "timings": {
-      "responseAverage": 9.5,
+      "responseAverage": 10.333333333333334,
       "responseMin": 4,
-      "responseMax": 25,
-      "responseSd": 7.182153808805082,
+      "responseMax": 24,
+      "responseSd": 6.548960901462833,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -2531,8 +2531,8 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1794496937199,
-      "completed": 1794496943604
+      "started": 1794606795338,
+      "completed": 1794606801792
     },
     "executions": [
       {
@@ -2545,17 +2545,17 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "9f557e17-c07e-4fc4-af1c-bf93e71bdeb3",
-          "httpRequestId": "8f5f619f-e853-4041-9a3e-f4cd37814f11",
-          "scriptId": "b0ff5da6-1de7-4743-b4d3-eb02be10bc9e",
-          "execution": "13589350-856e-464a-855d-86d7c17cabc2"
+          "ref": "15214617-1a94-4e04-ae84-dd367db05de3",
+          "httpRequestId": "cf977782-a2ad-4029-b84a-ea8aa4152b5a",
+          "scriptId": "2d3f4655-6558-4e80-90d9-22bd84fdcf57",
+          "execution": "dc4c9f44-5b55-4070-bca5-a99437b14dd7"
         },
         "item": {
-          "id": "c4fe85fe-7da9-428f-866b-aba672c0d945",
-          "name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+          "id": "8b311914-596c-4827-8dd4-6c7157a718ca",
+          "name": "2.1 Grupo de serviço lbgestufa",
           "request": {
             "description": {
-              "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+              "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
               "type": "text/plain"
             },
             "url": {
@@ -2600,7 +2600,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b0ff5da6-1de7-4743-b4d3-eb02be10bc9e",
+                "id": "2d3f4655-6558-4e80-90d9-22bd84fdcf57",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"201 Created (ou 409 se o grupo já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -2615,7 +2615,7 @@
                   "  pm.test(\"Dispositivos não provisionados são rejeitados\", () => pm.expect(g.autoprovision).to.eql(false));",
                   "});"
                 ],
-                "_lastExecutionId": "13589350-856e-464a-855d-86d7c17cabc2"
+                "_lastExecutionId": "dc4c9f44-5b55-4070-bca5-a99437b14dd7"
               }
             }
           ]
@@ -2660,7 +2660,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "d663fc0c-ad3c-4646-9f98-cd1cf1149752",
+              "value": "31b27412-c990-4395-907c-717b988bcef7",
               "system": true
             },
             {
@@ -2682,7 +2682,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "5656a002-bd39-4621-88e8-b6815e135368",
+          "id": "fe7372f4-d954-41b9-82f9-d2aee1095ec3",
           "status": "OK",
           "code": 200,
           "header": [
@@ -2692,7 +2692,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "17bf01c9-06c2-4d24-891d-4225b8dac1b5"
+              "value": "cb5739b0-6ad2-465e-96e7-9f8cfd28f064"
             },
             {
               "key": "Content-Type",
@@ -2708,7 +2708,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:17 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:15 GMT"
             },
             {
               "key": "Connection",
@@ -3010,10 +3010,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 7,
+          "responseTime": 10,
           "responseSize": 285
         },
-        "id": "e7788c35-09fe-4851-8fd1-d5101aa7fdf0",
+        "id": "a99456a5-fa4b-42f2-a37d-d036d2cdfe0c",
         "assertions": [
           {
             "assertion": "201 Created (ou 409 se o grupo já existia)",
@@ -3047,17 +3047,17 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "9f557e17-c07e-4fc4-af1c-bf93e71bdeb3",
-          "httpRequestId": "8f5f619f-e853-4041-9a3e-f4cd37814f11",
-          "scriptId": "b0ff5da6-1de7-4743-b4d3-eb02be10bc9e",
-          "execution": "13589350-856e-464a-855d-86d7c17cabc2"
+          "ref": "15214617-1a94-4e04-ae84-dd367db05de3",
+          "httpRequestId": "cf977782-a2ad-4029-b84a-ea8aa4152b5a",
+          "scriptId": "2d3f4655-6558-4e80-90d9-22bd84fdcf57",
+          "execution": "dc4c9f44-5b55-4070-bca5-a99437b14dd7"
         },
         "item": {
-          "id": "c4fe85fe-7da9-428f-866b-aba672c0d945",
-          "name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+          "id": "8b311914-596c-4827-8dd4-6c7157a718ca",
+          "name": "2.1 Grupo de serviço lbgestufa",
           "request": {
             "description": {
-              "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+              "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
               "type": "text/plain"
             },
             "url": {
@@ -3102,7 +3102,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b0ff5da6-1de7-4743-b4d3-eb02be10bc9e",
+                "id": "2d3f4655-6558-4e80-90d9-22bd84fdcf57",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"201 Created (ou 409 se o grupo já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -3117,7 +3117,7 @@
                   "  pm.test(\"Dispositivos não provisionados são rejeitados\", () => pm.expect(g.autoprovision).to.eql(false));",
                   "});"
                 ],
-                "_lastExecutionId": "13589350-856e-464a-855d-86d7c17cabc2"
+                "_lastExecutionId": "dc4c9f44-5b55-4070-bca5-a99437b14dd7"
               }
             }
           ]
@@ -3162,7 +3162,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "d663fc0c-ad3c-4646-9f98-cd1cf1149752",
+              "value": "31b27412-c990-4395-907c-717b988bcef7",
               "system": true
             },
             {
@@ -3184,7 +3184,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "5656a002-bd39-4621-88e8-b6815e135368",
+          "id": "fe7372f4-d954-41b9-82f9-d2aee1095ec3",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3194,7 +3194,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "17bf01c9-06c2-4d24-891d-4225b8dac1b5"
+              "value": "cb5739b0-6ad2-465e-96e7-9f8cfd28f064"
             },
             {
               "key": "Content-Type",
@@ -3210,7 +3210,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:17 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:15 GMT"
             },
             {
               "key": "Connection",
@@ -3512,10 +3512,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 7,
+          "responseTime": 10,
           "responseSize": 285
         },
-        "id": "e7788c35-09fe-4851-8fd1-d5101aa7fdf0",
+        "id": "a99456a5-fa4b-42f2-a37d-d036d2cdfe0c",
         "assertions": [
           {
             "assertion": "201 Created (ou 409 se o grupo já existia)",
@@ -3541,21 +3541,21 @@
       },
       {
         "cursor": {
-          "ref": "1848356b-f835-4bf9-9108-88e3f62f87ef",
+          "ref": "90226cca-b0ed-4335-9d21-e341676ec903",
           "length": 4,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "1f78d0f6-5eb7-4264-82c3-eee4e5195167",
-          "scriptId": "29fcb771-275a-4ab9-9197-b69fa01810e6",
-          "execution": "fd3e4002-a05d-425d-931c-85f6cc6d7b7b"
+          "httpRequestId": "de48a8c6-3a11-4731-87b3-5af8fc9957ca",
+          "scriptId": "3c103f27-4d05-4a81-bd46-08c106555fd1",
+          "execution": "d1fe31c7-9ea0-49b1-9322-386ee700ca3d"
         },
         "item": {
-          "id": "10982e55-7e66-4f59-be6e-656125be7414",
-          "name": "2.2 [Complete o corpo] Dispositivo da estufa",
+          "id": "66a58917-5708-4d69-82f4-7766f4536aeb",
+          "name": "2.2 Dispositivo estufa2604",
           "request": {
             "description": {
-              "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+              "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
               "type": "text/plain"
             },
             "url": {
@@ -3600,7 +3600,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "29fcb771-275a-4ab9-9197-b69fa01810e6",
+                "id": "3c103f27-4d05-4a81-bd46-08c106555fd1",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"201 Created (ou 409 se já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -3622,7 +3622,7 @@
                   "  pm.test(\"Estático location (geo:json, Point)\", () => { const l = est.find(s => s.name === \"location\"); pm.expect(l).to.exist; pm.expect(l.type).to.eql(\"geo:json\"); pm.expect(l.value.type).to.eql(\"Point\"); });",
                   "});"
                 ],
-                "_lastExecutionId": "fd3e4002-a05d-425d-931c-85f6cc6d7b7b"
+                "_lastExecutionId": "d1fe31c7-9ea0-49b1-9322-386ee700ca3d"
               }
             }
           ]
@@ -3668,7 +3668,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "fee58f4f-1f31-47be-8d7f-1be395b6196c",
+              "value": "ebf03dd2-0c78-41cb-86d5-69a8425e2017",
               "system": true
             },
             {
@@ -3690,7 +3690,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "84b91f99-7238-41c3-a5c3-d2b739485779",
+          "id": "ce92114e-9356-407c-9891-72b199e022f0",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3700,7 +3700,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "cafd75d4-4fce-4ccd-9785-ca39f3a2c6ac"
+              "value": "97dbbc33-352f-4de7-94bb-691d51e5536e"
             },
             {
               "key": "Content-Type",
@@ -3716,7 +3716,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:17 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:15 GMT"
             },
             {
               "key": "Connection",
@@ -4764,7 +4764,7 @@
           "responseTime": 4,
           "responseSize": 1028
         },
-        "id": "9d76673a-3eb0-45da-8359-057ce06265d9",
+        "id": "1b6bd4be-e05f-4ef5-b4ba-a926e7500b7b",
         "assertions": [
           {
             "assertion": "201 Created (ou 409 se já existia)",
@@ -4846,21 +4846,21 @@
       },
       {
         "cursor": {
-          "ref": "1848356b-f835-4bf9-9108-88e3f62f87ef",
+          "ref": "90226cca-b0ed-4335-9d21-e341676ec903",
           "length": 4,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "1f78d0f6-5eb7-4264-82c3-eee4e5195167",
-          "scriptId": "29fcb771-275a-4ab9-9197-b69fa01810e6",
-          "execution": "fd3e4002-a05d-425d-931c-85f6cc6d7b7b"
+          "httpRequestId": "de48a8c6-3a11-4731-87b3-5af8fc9957ca",
+          "scriptId": "3c103f27-4d05-4a81-bd46-08c106555fd1",
+          "execution": "d1fe31c7-9ea0-49b1-9322-386ee700ca3d"
         },
         "item": {
-          "id": "10982e55-7e66-4f59-be6e-656125be7414",
-          "name": "2.2 [Complete o corpo] Dispositivo da estufa",
+          "id": "66a58917-5708-4d69-82f4-7766f4536aeb",
+          "name": "2.2 Dispositivo estufa2604",
           "request": {
             "description": {
-              "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+              "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
               "type": "text/plain"
             },
             "url": {
@@ -4905,7 +4905,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "29fcb771-275a-4ab9-9197-b69fa01810e6",
+                "id": "3c103f27-4d05-4a81-bd46-08c106555fd1",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"201 Created (ou 409 se já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -4927,7 +4927,7 @@
                   "  pm.test(\"Estático location (geo:json, Point)\", () => { const l = est.find(s => s.name === \"location\"); pm.expect(l).to.exist; pm.expect(l.type).to.eql(\"geo:json\"); pm.expect(l.value.type).to.eql(\"Point\"); });",
                   "});"
                 ],
-                "_lastExecutionId": "fd3e4002-a05d-425d-931c-85f6cc6d7b7b"
+                "_lastExecutionId": "d1fe31c7-9ea0-49b1-9322-386ee700ca3d"
               }
             }
           ]
@@ -4973,7 +4973,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "fee58f4f-1f31-47be-8d7f-1be395b6196c",
+              "value": "ebf03dd2-0c78-41cb-86d5-69a8425e2017",
               "system": true
             },
             {
@@ -4995,7 +4995,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "84b91f99-7238-41c3-a5c3-d2b739485779",
+          "id": "ce92114e-9356-407c-9891-72b199e022f0",
           "status": "OK",
           "code": 200,
           "header": [
@@ -5005,7 +5005,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "cafd75d4-4fce-4ccd-9785-ca39f3a2c6ac"
+              "value": "97dbbc33-352f-4de7-94bb-691d51e5536e"
             },
             {
               "key": "Content-Type",
@@ -5021,7 +5021,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:17 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:15 GMT"
             },
             {
               "key": "Connection",
@@ -6069,7 +6069,7 @@
           "responseTime": 4,
           "responseSize": 1028
         },
-        "id": "9d76673a-3eb0-45da-8359-057ce06265d9",
+        "id": "1b6bd4be-e05f-4ef5-b4ba-a926e7500b7b",
         "assertions": [
           {
             "assertion": "201 Created (ou 409 se já existia)",
@@ -6151,15 +6151,15 @@
       },
       {
         "cursor": {
-          "ref": "4e8aab34-0c3f-4517-ad55-c97486d46c7e",
+          "ref": "c03d357c-e7de-471e-9255-6db49aed9605",
           "length": 4,
           "cycles": 1,
           "position": 2,
           "iteration": 0,
-          "httpRequestId": "f056f052-79b8-433f-9b6f-aca26938fe1b"
+          "httpRequestId": "b12177c2-dc7e-49fd-acc0-8d8e0395feb3"
         },
         "item": {
-          "id": "83639339-fd26-4b25-907c-e3f905bc99bc",
+          "id": "88d754e6-b4f8-407c-a84d-e3fe198a7058",
           "name": "2.3 [Pronto] Quem atende os comandos da estufa?",
           "request": {
             "description": {
@@ -6195,7 +6195,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "7bbac350-2403-44ee-a156-59f8db8ea6a4",
+                "id": "6aeaa52e-ca37-422a-9d92-fdedb04da900",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -6205,7 +6205,7 @@
                   "pm.test(\"Registro da entidade da estufa\", () => pm.expect(r).to.exist);",
                   "pm.test(\"Os 4 comandos são atendidos pelo IoT Agent\", () => { pm.expect(r, \"registro não encontrado\").to.exist; pm.expect(r.provider.http.url).to.match(/iot-agent:4041/); pm.expect(r.dataProvided.attrs).to.include.members([\"setRelay\", \"setServo\", \"setInterval\", \"setSending\"]); });"
                 ],
-                "_lastExecutionId": "652a4d35-fc5b-41a2-9664-8900fc6dc704"
+                "_lastExecutionId": "aa33b5db-80ea-4d68-9316-a6ecc79c5d7b"
               }
             }
           ]
@@ -6254,7 +6254,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "6366e3e3-2079-4a40-ae51-c2536f1fc10c",
+              "value": "5f2b7e74-9566-409b-9610-8be35e53c3a4",
               "system": true
             },
             {
@@ -6276,17 +6276,17 @@
           "method": "GET"
         },
         "response": {
-          "id": "9b0b8d27-299a-4886-9eba-8e52caed9fc2",
+          "id": "1955ae2d-8377-44c6-b2f6-3876d938dfdc",
           "status": "OK",
           "code": 200,
           "header": [
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:17 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:15 GMT"
             },
             {
               "key": "Fiware-Correlator",
-              "value": "d894a06e-deac-11f1-a314-4e8d72899d9d"
+              "value": "a12b0702-dfac-11f1-a632-dacb6ca02829"
             },
             {
               "key": "Content-Type",
@@ -6610,10 +6610,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 5,
+          "responseTime": 6,
           "responseSize": 307
         },
-        "id": "83639339-fd26-4b25-907c-e3f905bc99bc",
+        "id": "88d754e6-b4f8-407c-a84d-e3fe198a7058",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -6635,15 +6635,15 @@
       },
       {
         "cursor": {
-          "ref": "a90c07d0-d5e7-4147-968b-89bcfcfc404c",
+          "ref": "268bfdc2-60b8-4397-9c85-7e37cbd09837",
           "length": 4,
           "cycles": 1,
           "position": 3,
           "iteration": 0,
-          "httpRequestId": "d51a09b9-6fc6-4055-bf68-b452448a6c76"
+          "httpRequestId": "3be8a585-0cfe-4d92-b469-a9a6bceafa5e"
         },
         "item": {
-          "id": "5738f1ee-ffbb-47bd-a419-45fbe2250bfe",
+          "id": "b0905ee0-3249-4357-8108-6d8fa1909170",
           "name": "2.4 [Verificação] A medida de teste chegou ao Orion",
           "request": {
             "description": {
@@ -6685,19 +6685,19 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "cf76e45f-5573-4d84-839f-17357cef14a0",
+                "id": "1dace1f4-be7f-4743-8fb4-35db3bf20f85",
                 "type": "text/javascript",
                 "exec": [
                   "// aguarda uma medida (de teste ou do firmware)",
                   "setTimeout(() => {}, 6000);"
                 ],
-                "_lastExecutionId": "f9c849f5-a179-4b76-9a1d-c0af27d9641b"
+                "_lastExecutionId": "5f386614-e84f-460e-a3fe-0f128b0725b4"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "192fd5b3-acce-4b91-b1e9-a9af573cd053",
+                "id": "2665a706-152e-4379-b78e-bcb5496a2d36",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -6705,7 +6705,7 @@
                   "pm.test(\"Pelo menos uma medida numérica\", () => pm.expect([\"temperature\", \"relativeHumidity\", \"soilMoisture\", \"illuminance\", \"relayState\", \"windowAngle\", \"samplingInterval\"].some(a => typeof e[a] === \"number\")).to.be.true);",
                   "pm.test(\"TimeInstant da medida\", () => pm.expect(e).to.have.property(\"TimeInstant\"));"
                 ],
-                "_lastExecutionId": "26f6fcfb-9965-4f78-85c8-a239e698359c"
+                "_lastExecutionId": "bd0dece5-98a6-4e95-88c3-04b22cb3fc5d"
               }
             }
           ]
@@ -6760,7 +6760,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "70a7a73f-83cf-4707-b009-b386e4166b2d",
+              "value": "574c146b-61ac-4459-9e3b-5477089f2e7e",
               "system": true
             },
             {
@@ -6782,17 +6782,17 @@
           "method": "GET"
         },
         "response": {
-          "id": "18b2752a-8dac-41c7-9eb9-1df37515573f",
+          "id": "c303799f-3a9a-4560-a280-daa2ab01fd75",
           "status": "OK",
           "code": 200,
           "header": [
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:23 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:21 GMT"
             },
             {
               "key": "Fiware-Correlator",
-              "value": "dc384072-deac-11f1-a314-4e8d72899d9d"
+              "value": "a4cd76a6-dfac-11f1-a632-dacb6ca02829"
             },
             {
               "key": "Content-Type",
@@ -6800,7 +6800,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "360"
+              "value": "614"
             }
           ],
           "stream": {
@@ -6885,20 +6885,20 @@
               49,
               45,
               49,
-              50,
+              51,
               84,
+              50,
               49,
-              53,
-              58,
-              50,
-              48,
               58,
               53,
-              50,
+              51,
+              58,
+              49,
+              56,
               46,
-              49,
-              51,
-              51,
+              54,
+              57,
+              52,
               90,
               34,
               44,
@@ -6917,7 +6917,9 @@
               34,
               58,
               55,
-              48,
+              53,
+              46,
+              54,
               44,
               34,
               108,
@@ -7013,8 +7015,8 @@
               121,
               34,
               58,
-              54,
-              49,
+              52,
+              48,
               44,
               34,
               114,
@@ -7029,7 +7031,7 @@
               101,
               34,
               58,
-              48,
+              49,
               44,
               34,
               115,
@@ -7050,7 +7052,258 @@
               108,
               34,
               58,
-              51,
+              53,
+              44,
+              34,
+              115,
+              101,
+              116,
+              73,
+              110,
+              116,
+              101,
+              114,
+              118,
+              97,
+              108,
+              95,
+              105,
+              110,
+              102,
+              111,
+              34,
+              58,
+              34,
+              69,
+              82,
+              82,
+              79,
+              58,
+              32,
+              115,
+              101,
+              116,
+              73,
+              110,
+              116,
+              101,
+              114,
+              118,
+              97,
+              108,
+              32,
+              97,
+              99,
+              101,
+              105,
+              116,
+              97,
+              32,
+              50,
+              32,
+              97,
+              32,
+              49,
+              48,
+              32,
+              115,
+              101,
+              103,
+              117,
+              110,
+              100,
+              111,
+              115,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              73,
+              110,
+              116,
+              101,
+              114,
+              118,
+              97,
+              108,
+              95,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              82,
+              101,
+              108,
+              97,
+              121,
+              95,
+              105,
+              110,
+              102,
+              111,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              82,
+              101,
+              108,
+              97,
+              121,
+              95,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              83,
+              101,
+              110,
+              100,
+              105,
+              110,
+              103,
+              95,
+              105,
+              110,
+              102,
+              111,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              83,
+              101,
+              110,
+              100,
+              105,
+              110,
+              103,
+              95,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              83,
+              101,
+              114,
+              118,
+              111,
+              95,
+              105,
+              110,
+              102,
+              111,
+              34,
+              58,
+              34,
+              69,
+              82,
+              82,
+              79,
+              58,
+              32,
+              115,
+              101,
+              116,
+              83,
+              101,
+              114,
+              118,
+              111,
+              32,
+              97,
+              99,
+              101,
+              105,
+              116,
+              97,
+              32,
+              48,
+              32,
+              97,
+              32,
+              49,
+              56,
+              48,
+              34,
+              44,
+              34,
+              115,
+              101,
+              116,
+              83,
+              101,
+              114,
+              118,
+              111,
+              95,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              34,
+              79,
+              75,
+              34,
               44,
               34,
               115,
@@ -7067,7 +7320,9 @@
               101,
               34,
               58,
-              52,
+              51,
+              48,
+              46,
               50,
               44,
               34,
@@ -7086,8 +7341,6 @@
               58,
               50,
               52,
-              46,
-              56,
               44,
               34,
               119,
@@ -7103,6 +7356,7 @@
               101,
               34,
               58,
+              57,
               48,
               44,
               34,
@@ -7169,10 +7423,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 10,
-          "responseSize": 360
+          "responseTime": 11,
+          "responseSize": 614
         },
-        "id": "5738f1ee-ffbb-47bd-a419-45fbe2250bfe",
+        "id": "b0905ee0-3249-4357-8108-6d8fa1909170",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -7190,7 +7444,7 @@
       }
     ],
     "transfers": {
-      "responseTotal": 3550
+      "responseTotal": 3804
     },
     "failures": [],
     "error": null

@@ -129,9 +129,9 @@ Para configurar o Grafana em uma instalação nova: abra `http://localhost:3000`
 
 ## Verificação realizada e pendências reais
 
-No ambiente de preparação, os nove serviços ficaram `healthy`; a configuração Compose passou na validação; a ponte MQTT foi testada nos dois sentidos e filtrou outra chave. Grupo/dispositivo receberam HTTP 201 e uma amostra MQTT atualizou Orion. Etapa 1 Postman: 6 requisições e 10 asserções sem falha. Etapa 2: 6 requisições e 31 asserções sem falha. Na Etapa 4, as subscrições foram criadas e, após nova publicação de medidas, as 11 verificações seguintes passaram com 38 asserções: entrega Cygnus, histórico MySQL, alerta, fonte de dados e dashboard. Resultados estão em `postman/resultado-etapa1.json`, `resultado-etapa2.json` e `resultado-etapa4.json`.
+Na validação final, os nove serviços ficaram `healthy` e a configuração Compose passou na validação. Etapa 1 Postman: 6 requisições e 10 asserções sem falha. Etapa 2: 6 requisições e 31 asserções sem falha. Etapa 3, com o circuito revisado em execução no Wokwi: 16 requisições e 39 asserções sem falha, cobrindo medidas, quatro comandos e limites inválidos. Etapa 4: 13 requisições e 41 asserções sem falha, cobrindo subscrições, Cygnus, histórico MySQL, alerta, fonte de dados e painel Grafana. Os resultados ficam em `postman/resultado-etapa1.json`, `resultado-etapa2.json`, `resultado-etapa3.json` e `resultado-etapa4.json`.
 
-A Etapa 3 foi executada somente no simulador Wokwi e validou o caminho para HiveMQ, ponte MQTT, IoT Agent e Orion, além dos quatro comandos e seus limites. Não houve teste em placa física. Para manter o escopo reproduzível no simulador, `location` e as faixas ADC têm valores de demonstração; eles não afirmam uma localização nem calibração de sensores físicos.
+A Etapa 3 foi executada somente no simulador Wokwi e validou o caminho para HiveMQ, ponte MQTT, IoT Agent e Orion, além dos quatro comandos e seus limites. O indicador local de solo seco também foi observado no simulador nos dois estados (solo seco e acima do limiar). Não houve teste em placa física. Para manter o escopo reproduzível no simulador, `location` e as faixas ADC têm valores de demonstração; eles não afirmam uma localização nem calibração de sensores físicos.
 
 ## Organização do projeto
 

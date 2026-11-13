@@ -5,7 +5,7 @@
     },
     "item": [
       {
-        "id": "b9f6e843-29a7-419e-a267-499579cf1eaa",
+        "id": "7d903617-c524-4b19-aee9-7ae2a32ad763",
         "name": "0 - Recomeçar do zero [Pronto]",
         "description": {
           "content": "Apaga subscrições, dispositivo, entidade e grupo do seu caminho. O histórico do MySQL e o painel permanecem. Rode a coleção inteira no Runner (começando por aqui) para provar que tudo funciona a partir do zero. Reset completo (contêineres e volumes, inclusive histórico e painel): `docker compose down -v` na pasta `plataforma`.",
@@ -13,7 +13,7 @@
         },
         "item": [
           {
-            "id": "80d765ee-0ebb-4003-9e14-91e9886c0cf2",
+            "id": "cd3c24a7-7ae4-4fff-a1c8-cbc22cd1dd47",
             "name": "0.1 Apaga as subscrições do caminho",
             "request": {
               "description": {
@@ -49,7 +49,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "89b65d18-b91b-488d-a032-b3963e7ca902",
+                  "id": "4cc6ee5e-8a70-4d26-a344-2f1888c2cdb9",
                   "type": "text/javascript",
                   "exec": [
                     "const subs = pm.response.json();",
@@ -62,7 +62,7 @@
             ]
           },
           {
-            "id": "0cbc61fc-4d71-4c38-9f42-b203fdab3d08",
+            "id": "be6787d8-1f73-414e-97c6-6db95cc3b592",
             "name": "0.2 Apaga o dispositivo",
             "request": {
               "url": {
@@ -95,7 +95,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "bb160b81-30cc-4595-80c8-b32ac402a1a7",
+                  "id": "029fa787-0c70-4ab2-b234-bb96209f845a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -105,7 +105,7 @@
             ]
           },
           {
-            "id": "72f2c602-16e5-4812-943e-c81f2156f320",
+            "id": "53286f20-67ce-46b3-ab48-ff14a2ffc797",
             "name": "0.3 Apaga a entidade",
             "request": {
               "url": {
@@ -138,7 +138,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "394a3ad1-fd91-48df-9b5b-991e980ce853",
+                  "id": "0d0c48b0-4d85-49d6-98b2-5526cb4ef056",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -148,7 +148,7 @@
             ]
           },
           {
-            "id": "29d191ff-3c88-4ff9-b028-a292402b7727",
+            "id": "62d4d4d1-e6e9-46b5-b968-08e8e2087778",
             "name": "0.4 Apaga o grupo",
             "request": {
               "url": {
@@ -189,7 +189,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e397e401-5d70-4c58-92a9-841e6e9cb125",
+                  "id": "93ed10f5-c192-4a5d-bff2-cee5a25c9c89",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 (ou 404 se não existia)\", () => pm.expect(pm.response.code).to.be.oneOf([204, 404]));"
@@ -202,7 +202,7 @@
         "event": []
       },
       {
-        "id": "bb6f7572-6302-46e4-b01e-cfd54a152b6c",
+        "id": "39dc0ae1-e95d-4044-b1ac-17fab080891d",
         "name": "Etapa 1 - Ambiente",
         "description": {
           "content": "Verificações prontas: o ambiente de `plataforma/docker-compose.yml` está no ar.",
@@ -210,7 +210,7 @@
         },
         "item": [
           {
-            "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+            "id": "067ebe9b-60aa-4ba2-8f61-b512705c68b6",
             "name": "1.1 [Verificação] Orion no ar",
             "request": {
               "url": {
@@ -231,19 +231,19 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "77123a9e-ff91-47f8-989e-3666b9044415",
+                  "id": "5f908590-a94f-47e3-a800-51c4e7f2e7f2",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                     "pm.test(\"Orion 4.5.0\", () => pm.expect(pm.response.json().orion.version).to.eql(\"4.5.0\"));"
                   ],
-                  "_lastExecutionId": "ef80d45e-cf01-43f6-b8a4-3101b11a255c"
+                  "_lastExecutionId": "105551f0-5a61-4511-8ec5-189b161de652"
                 }
               }
             ]
           },
           {
-            "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+            "id": "5e82e777-8e9b-4346-998f-95e6a863b1a6",
             "name": "1.2 [Verificação] IoT Agent no ar",
             "request": {
               "url": {
@@ -265,19 +265,19 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "8ddb07a3-7ff9-4dfa-8622-eb14299d6eaf",
+                  "id": "dc83a405-3ca5-480a-abe6-9548f380be07",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                     "pm.test(\"IoT Agent JSON 3.14.0\", () => pm.expect(pm.response.json().version).to.eql(\"3.14.0\"));"
                   ],
-                  "_lastExecutionId": "2b7d5427-e94e-4fc3-abe9-680f02e3e9a8"
+                  "_lastExecutionId": "27227cbd-a774-4955-8801-d5fa1cef6528"
                 }
               }
             ]
           },
           {
-            "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+            "id": "86de6eb1-5dba-4ea5-a7d9-d8dd2b8d7633",
             "name": "1.3 [Verificação] Cygnus no ar",
             "request": {
               "url": {
@@ -299,18 +299,18 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "21a7f18e-b4c5-49bf-a6ab-7f6b86c93198",
+                  "id": "6d853b1d-66df-45b0-a351-1a842f2ffd2e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
                   ],
-                  "_lastExecutionId": "4dc3004e-45b9-420b-97ad-1c6351a62f1d"
+                  "_lastExecutionId": "2cf486a4-1cec-439e-9695-87818b3ac777"
                 }
               }
             ]
           },
           {
-            "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+            "id": "f5439de2-6a8f-45b1-b04f-b77c0c5c7e15",
             "name": "1.4 [Verificação] Grafana no ar",
             "request": {
               "url": {
@@ -332,19 +332,19 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5c7cba76-f256-49ba-9699-29ea78204e20",
+                  "id": "f3f94951-0cd9-4d5e-a4bc-659671c4959f",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                     "pm.test(\"Banco do Grafana ok\", () => pm.expect(pm.response.json().database).to.eql(\"ok\"));"
                   ],
-                  "_lastExecutionId": "20689145-7cf5-4f91-9e3a-1f45c0d77c5d"
+                  "_lastExecutionId": "9994def6-cc05-46e7-93d9-79158ad48d04"
                 }
               }
             ]
           },
           {
-            "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+            "id": "6cded702-4393-4ced-abb7-435696ac75e6",
             "name": "1.5 [Verificação] Consumidor no ar",
             "request": {
               "url": {
@@ -363,18 +363,18 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0d9aaabe-ef86-4cb2-8e16-57241e470b2f",
+                  "id": "235e9a99-f718-4d9d-a894-68d01625cad0",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
                   ],
-                  "_lastExecutionId": "4188ffc1-6a21-465e-ba6f-3878006aeb73"
+                  "_lastExecutionId": "9acbb39d-db28-44e3-95d4-a39cb4bcf12d"
                 }
               }
             ]
           },
           {
-            "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+            "id": "a2e5b2b1-69e5-4c20-b04e-d70f6818f3d4",
             "name": "1.6 [Verificação] Variável apikey preenchida",
             "request": {
               "description": {
@@ -400,14 +400,14 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "1d8361b9-c25a-4076-b914-7776f6a14b96",
+                  "id": "a7a800ad-d666-4ab4-9fc2-158e5bec44fc",
                   "type": "text/javascript",
                   "exec": [
                     "const k = pm.collectionVariables.get(\"apikey\");",
                     "pm.test(\"apikey com 4 a 24 letras e números\", () => pm.expect(k).to.match(/^[A-Za-z0-9]{4,24}$/));",
                     "pm.test(\"apikey diferente do valor de exemplo\", () => pm.expect(k).to.not.eql(\"troqueesteid\"));"
                   ],
-                  "_lastExecutionId": "6f0e0c5f-338a-4c9a-86ea-d02c314f0d83"
+                  "_lastExecutionId": "a2c016c9-ba54-4ea1-88ea-12656faa92eb"
                 }
               }
             ]
@@ -416,7 +416,7 @@
         "event": []
       },
       {
-        "id": "945a1567-a049-4547-8213-c5f834a191ed",
+        "id": "81d8af69-2d2d-4aba-8d6c-07bd26c9f427",
         "name": "Etapa 2 - Provisionamento",
         "description": {
           "content": "Grupo, dispositivo e o registro que o IoT Agent cria no Orion.",
@@ -424,11 +424,11 @@
         },
         "item": [
           {
-            "id": "365a208d-2f22-4ddd-a644-095496ca8f52",
-            "name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+            "id": "ab93d3c9-2f52-4243-a14c-6202e1742fd7",
+            "name": "2.1 Grupo de serviço lbgestufa",
             "request": {
               "description": {
-                "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -473,7 +473,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "74b1fe2a-5b58-468d-be93-fe4b67c6ec6c",
+                  "id": "25bbf951-76f6-4ea0-9ae0-f365c12674ec",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"201 Created (ou 409 se o grupo já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -493,11 +493,11 @@
             ]
           },
           {
-            "id": "83324e43-a3d3-4ea4-89ab-4fd75127b956",
-            "name": "2.2 [Complete o corpo] Dispositivo da estufa",
+            "id": "948cba98-b30b-4c33-9bda-7d34a5e78e89",
+            "name": "2.2 Dispositivo estufa2604",
             "request": {
               "description": {
-                "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -542,7 +542,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "28187c34-fa07-4004-a778-bc5454f33ebf",
+                  "id": "b2b375ac-6a34-4618-978a-54b13438803d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"201 Created (ou 409 se já existia)\", () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
@@ -569,7 +569,7 @@
             ]
           },
           {
-            "id": "375f2199-fca7-4d10-9ede-252d2a8a8d5f",
+            "id": "5827c6d4-ac3c-475f-83d3-31cf002efa4e",
             "name": "2.3 [Pronto] Quem atende os comandos da estufa?",
             "request": {
               "description": {
@@ -605,7 +605,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a2edbab8-3ab9-402c-9cad-976e6aa3b833",
+                  "id": "0076da05-fe2a-4ffe-b5b5-d4a5f12f1515",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -620,7 +620,7 @@
             ]
           },
           {
-            "id": "a85eca22-7b9b-44b0-83a2-54727887ec30",
+            "id": "b0ba807f-7fbd-4b03-8af8-46311f47772a",
             "name": "2.4 [Verificação] A medida de teste chegou ao Orion",
             "request": {
               "description": {
@@ -662,7 +662,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "6e929069-d03f-43ef-9f60-ea34bca40c49",
+                  "id": "d3e49740-3979-4065-ac38-9e45927ea612",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda uma medida (de teste ou do firmware)",
@@ -673,7 +673,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b776cb0c-da72-461f-aec2-5e5afc7081f1",
+                  "id": "0ad32259-f350-4b8e-8a7a-b157f895362d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -689,7 +689,7 @@
         "event": []
       },
       {
-        "id": "344f1d68-6f9e-4098-a2df-a07026b02744",
+        "id": "4cd12d5d-6942-4b46-a229-4928ab1b8087",
         "name": "Etapa 3 - Firmware e comandos",
         "description": {
           "content": "Medidas da estufa e os 4 comandos, sempre **pelo Orion**.",
@@ -697,7 +697,7 @@
         },
         "item": [
           {
-            "id": "a4a7e9a8-b2ad-423c-aaee-a23ac2bed995",
+            "id": "f35dba7b-824b-4750-a8b9-2b37fe0d88e7",
             "name": "3.1 [Pronto] A estufa está publicando",
             "request": {
               "description": {
@@ -743,7 +743,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "53c34273-f454-4b79-8e8a-2f9f889b6591",
+                  "id": "b95d3ce5-56f6-4244-873a-68cd9cb4b2a0",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -758,7 +758,7 @@
             ]
           },
           {
-            "id": "efe259ce-9a97-4fe5-ade3-504225f628d6",
+            "id": "d8885cb3-c0c0-4da2-8c62-fbaeae7bbaa9",
             "name": "3.2 [Pronto] Ligue o relé",
             "request": {
               "description": {
@@ -809,7 +809,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7d65b39e-f261-470e-9d43-61012e6241ab",
+                  "id": "420cee40-6bc1-4e9c-a439-31917b6b2d30",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -819,7 +819,7 @@
             ]
           },
           {
-            "id": "eb0279e2-9fde-44ac-83be-65fa5f528c34",
+            "id": "37520d99-ee8c-4137-bd7a-d8106399b8c2",
             "name": "3.3 [Pronto] O relé ligou?",
             "request": {
               "description": {
@@ -865,7 +865,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "e56eb03a-f62e-447d-98c4-2fc26026bd28",
+                  "id": "9362a414-e2e9-4b9f-b22f-388519b79f12",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -876,7 +876,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "3e2abfb7-826d-4941-a213-2c367e7d8be6",
+                  "id": "f9ada06d-7eea-4874-8228-f343d8e4cd17",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -890,7 +890,7 @@
             ]
           },
           {
-            "id": "9f2c983c-dba1-48ca-b88e-bf3be68b48ae",
+            "id": "40faa840-c7a7-479d-b2d7-9f59364cc92f",
             "name": "3.4 [Pronto] Abra a janela a 90°",
             "request": {
               "description": {
@@ -941,7 +941,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "766c494d-79f7-4977-a226-3be19340b164",
+                  "id": "a965e289-21f1-4470-a459-d65a1c1a09f1",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -951,7 +951,7 @@
             ]
           },
           {
-            "id": "037383b9-f514-47e9-8f74-d2a0a36e314b",
+            "id": "f7ef6473-68ba-4ad5-acbf-d1a505232cd1",
             "name": "3.5 [Verificação] Janela a 90°",
             "request": {
               "url": {
@@ -993,7 +993,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "a2d2adeb-d181-4c6b-9c2c-6ae4752a0bb4",
+                  "id": "f7e65190-0fb5-47cc-bb7d-14c581e21838",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1004,7 +1004,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "f6b82b97-1c66-472e-b18c-f283f22a235e",
+                  "id": "1a060da1-9c4e-4885-81d2-91e3799720f5",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1017,7 +1017,7 @@
             ]
           },
           {
-            "id": "884db0fa-a65d-44d5-8ed9-94a792701696",
+            "id": "1b88f5a7-8119-4593-8e98-1de3ee3c6f3e",
             "name": "3.6 [Pronto] Comando inválido: janela a 200°",
             "request": {
               "description": {
@@ -1068,7 +1068,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "084eca9a-6367-452e-9719-0d8c16a67e5f",
+                  "id": "5cdf9c74-6574-4151-be9a-bd7646f6c65e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1078,7 +1078,7 @@
             ]
           },
           {
-            "id": "eed998fd-f1dd-43ef-ad7e-c2f154c28e8a",
+            "id": "52f9b319-a419-419b-9121-4675d247082b",
             "name": "3.7 [Pronto] A estufa recusou?",
             "request": {
               "description": {
@@ -1124,7 +1124,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "d4aecdb2-1035-4fa4-b153-e670dc58ad0f",
+                  "id": "1c974022-2a83-4fd7-8ec4-63843c34dd70",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1135,7 +1135,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6429e6b9-9609-4406-a9c0-730c63e53333",
+                  "id": "38800249-486b-4a7f-9beb-903ef33792f9",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1148,7 +1148,7 @@
             ]
           },
           {
-            "id": "ee45d9df-7ff5-4d34-96f4-8fae66b0b36d",
+            "id": "47371e8e-dea0-44f3-9c17-cdd0db9efc8d",
             "name": "3.8 [Pronto] Colete a cada 5 s",
             "request": {
               "description": {
@@ -1199,7 +1199,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a54c1d28-f381-45bc-9311-59e339152610",
+                  "id": "955b35c8-ceb3-4846-848f-657caf8ed7f0",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1209,7 +1209,7 @@
             ]
           },
           {
-            "id": "ba0985a7-0ec8-4b92-8eea-a6342ab9e706",
+            "id": "be9ee65e-2ffb-438d-a705-f018b4764e64",
             "name": "3.9 [Verificação] Intervalo de 5 s",
             "request": {
               "url": {
@@ -1251,7 +1251,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "a634eaec-1937-4845-a19e-a6c6b679d9fa",
+                  "id": "67566bf6-be1d-4e2b-baa6-949d49d604d5",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1262,7 +1262,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "f9ed7dd1-aafc-43bd-b5e8-e8877911c5ca",
+                  "id": "fae67d44-272b-4aa7-90b3-917d6db903ca",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1275,7 +1275,7 @@
             ]
           },
           {
-            "id": "a3c8cbfc-aa49-450b-b0cd-be8f21ee211c",
+            "id": "0dcbe7f9-65e4-48fc-aaf4-2589c6a31346",
             "name": "3.10 [Pronto] Intervalo inválido: 30 s",
             "request": {
               "description": {
@@ -1326,7 +1326,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "64250127-101c-4e09-aa6d-628eb33df734",
+                  "id": "afe28ffc-2e81-4ebc-99d6-2bb4b97d0a9d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1336,7 +1336,7 @@
             ]
           },
           {
-            "id": "b4c2d358-4daa-424d-99c8-60542ee3ac7f",
+            "id": "2c02ba45-f83b-45ce-82b2-8e8da5b6ea21",
             "name": "3.11 [Verificação] Intervalo preservado",
             "request": {
               "url": {
@@ -1378,7 +1378,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "7ded0b5f-4dfc-415e-a7ff-77ec5f721e79",
+                  "id": "891d90c6-fda3-4852-9aff-019b030e1771",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1389,7 +1389,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "d16c3180-d358-4091-89b7-a9d357f49463",
+                  "id": "7e86602e-f2d1-4c5a-b0ef-b9e6b0ab9088",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1402,7 +1402,7 @@
             ]
           },
           {
-            "id": "18f68c13-4227-4be9-baae-8d845982c0c5",
+            "id": "81e8b4f0-01d7-43e9-a551-aed268da3c18",
             "name": "3.12 [Pronto] Desative o envio",
             "request": {
               "description": {
@@ -1453,7 +1453,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "2298fbd5-b7fa-4704-9f60-e78e32a34347",
+                  "id": "627cee49-7313-456e-a5d3-57ebc49792a8",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1463,7 +1463,7 @@
             ]
           },
           {
-            "id": "f270e6db-86b5-4449-8fd1-cb204a06df60",
+            "id": "ac9fa126-ab2b-45ef-a227-3a536c0bb1de",
             "name": "3.13 [Verificação] Envio desativado",
             "request": {
               "description": {
@@ -1502,7 +1502,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "f495bba9-a3f3-441f-99c6-04b3e0783650",
+                  "id": "355afbbb-bfc7-462a-ac5c-39fe9f5522db",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a ida e a volta do comando pelo broker público",
@@ -1513,7 +1513,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4b0496f5-3bf9-4424-bffe-95d094a77c86",
+                  "id": "0a536d9d-329e-4eed-a9ce-9c09bfbbff01",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1530,7 +1530,7 @@
             ]
           },
           {
-            "id": "72000841-18b8-4054-854a-a9b680def6e5",
+            "id": "a1160773-19b8-44b0-bb2c-ac57f8693f5e",
             "name": "3.14 [Pronto] Reative o envio",
             "request": {
               "description": {
@@ -1581,7 +1581,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "8d60a5b0-02f9-458f-b95f-7dbfc5073297",
+                  "id": "ea6eed08-f874-4baf-8d3f-dd7c63adb0e9",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"204 No Content\", () => pm.response.to.have.status(204));"
@@ -1591,7 +1591,7 @@
             ]
           },
           {
-            "id": "efa1edd0-bc83-4144-8d59-36f6e1b0ab33",
+            "id": "d13f8261-3691-4537-81ea-eb60a1517e2a",
             "name": "3.15 [Verificação] Envio reativado",
             "request": {
               "url": {
@@ -1626,7 +1626,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "1a882925-fca7-4d55-8f11-17a9a35ff559",
+                  "id": "92454c4e-8201-47f5-8c92-64e70fd8acb6",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda pelo menos uma medida no intervalo de 5 s",
@@ -1637,7 +1637,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "2d629951-1041-4124-a073-2f1ac3fc2843",
+                  "id": "8bbb30b6-4e96-4672-8b5b-a99e92158c0d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1652,7 +1652,7 @@
         "event": []
       },
       {
-        "id": "87b93759-32c5-453b-a584-11d083d4ba1d",
+        "id": "95358f6d-1de1-4222-8048-543a80d3a6f4",
         "name": "Etapa 4 - Subscrições, histórico e painel",
         "description": {
           "content": "Alerta, Cygnus/MySQL e o painel do Grafana.",
@@ -1660,11 +1660,11 @@
         },
         "item": [
           {
-            "id": "84ddfbf2-3e99-4122-8754-b46248b1c896",
-            "name": "4.1 [Complete o corpo] Subscrição do histórico (Cygnus)",
+            "id": "461da204-7f06-4bf1-87d4-6080ee32605a",
+            "name": "4.1 Subscrição de histórico (Cygnus)",
             "request": {
               "description": {
-                "content": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -1709,7 +1709,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "06949d7b-dd88-4683-a3b2-5dbe5dc1ee55",
+                  "id": "ba65fd19-26fe-479a-9ea5-9365f5a88b59",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
@@ -1722,7 +1722,7 @@
             ]
           },
           {
-            "id": "717fadbc-dbc0-443c-8543-eef38491cb47",
+            "id": "25233826-f4d5-4c4a-9a1d-68f8fcc9a931",
             "name": "4.2 [Verificação] Subscrição do histórico entregando",
             "request": {
               "url": {
@@ -1755,7 +1755,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "35d81df1-60b1-41dc-b543-85d099b2d9e4",
+                  "id": "a9e60fc6-c9df-4233-95a5-f97fc38272b8",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda algumas notificações",
@@ -1766,7 +1766,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "f0c79ed6-7f3b-4d8b-911b-fa6e0d5aa9c8",
+                  "id": "89f1b633-758f-4d7d-9726-ddbfcf15cf8b",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1781,7 +1781,7 @@
             ]
           },
           {
-            "id": "73a09a0d-1c0c-4c53-9de8-321f990194cb",
+            "id": "118c87aa-36e3-414f-a193-121c9d823df8",
             "name": "4.3 [Verificação] O Cygnus está recebendo",
             "request": {
               "url": {
@@ -1803,7 +1803,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "86471d60-80dd-4ba4-a2fa-fa9b213cd3e9",
+                  "id": "3d9ecaa2-5163-4fc6-b495-80fc9257b240",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1814,11 +1814,11 @@
             ]
           },
           {
-            "id": "ca6ec558-a31c-45c6-8a41-f188e14960ce",
-            "name": "4.4 [Complete o corpo] Notificação de solo seco (serviço externo)",
+            "id": "b55a301b-85a3-42ee-bb49-fb80f9896066",
+            "name": "4.4 Alerta de solo seco (consumidor)",
             "request": {
               "description": {
-                "content": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+                "content": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
                 "type": "text/plain"
               },
               "url": {
@@ -1863,7 +1863,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0072aabd-7e6c-47f5-8a85-02412c437d86",
+                  "id": "617661c7-b0c8-4b22-bae2-7e368c8cf0f8",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
@@ -1875,7 +1875,7 @@
             ]
           },
           {
-            "id": "f588f091-36da-47c4-acbf-2afb0f95bbdf",
+            "id": "15d2ced4-8b5a-4258-88ec-f25e315e2b76",
             "name": "4.5 [Verificação] Subscrição de alerta",
             "request": {
               "url": {
@@ -1908,7 +1908,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "34674db5-8168-4792-b69a-907498948e45",
+                  "id": "b2951aeb-a180-4ec3-8536-b68f9005957a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -1924,7 +1924,7 @@
             ]
           },
           {
-            "id": "0ccd0bb1-c1ae-46a9-a67f-1e50511f86e3",
+            "id": "5be2f942-733e-4d44-afd6-85ccd66a1a79",
             "name": "4.6 [Pronto] Limpa o consumidor",
             "request": {
               "url": {
@@ -1945,7 +1945,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "474a1ace-b906-466b-89f7-758830655cd1",
+                  "id": "7c8679df-2b4d-497e-8be4-ea9ce88b5370",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
@@ -1955,7 +1955,7 @@
             ]
           },
           {
-            "id": "6d0069db-ad6a-4305-a274-aaa52242ca2c",
+            "id": "10513639-4e94-40c1-a906-a20554d2df1f",
             "name": "4.7 [Pronto] Simula uma medida de solo seco (HTTP)",
             "request": {
               "description": {
@@ -2005,7 +2005,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6fb44ea4-99c6-4cfe-adc1-ffc076f98060",
+                  "id": "8068665c-663e-4242-b05d-a80cb3dbdbce",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Medida aceita\", () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));"
@@ -2015,7 +2015,7 @@
             ]
           },
           {
-            "id": "11c760d3-cf6a-44ba-920f-81aa2bab9eea",
+            "id": "33dec7d9-046c-4bca-b835-33f298274ce1",
             "name": "4.8 [Verificação] Alerta recebido",
             "request": {
               "url": {
@@ -2041,7 +2041,7 @@
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "aba0eed9-9873-4163-931b-88f86d6d83f8",
+                  "id": "59d3c76e-33b3-4c83-be13-ab12a96ffe1a",
                   "type": "text/javascript",
                   "exec": [
                     "// aguarda a notificação",
@@ -2052,7 +2052,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a42bc1b2-a146-4c10-8350-7e31b0cafda2",
+                  "id": "2a891f99-c2fb-4168-a085-bc1e41bfd0c6",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2065,7 +2065,7 @@
             ]
           },
           {
-            "id": "249cf78e-aa4c-44ba-8923-ea817c9847eb",
+            "id": "1461369c-25a6-4f91-a0df-3ef031d2a9d5",
             "name": "4.9 [Verificação] Fonte de dados MySQL",
             "request": {
               "url": {
@@ -2102,7 +2102,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4046bb42-6538-4272-ac40-38246fa5b7c7",
+                  "id": "e23cdab8-85d4-4032-bd25-ef0582d8c77a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2120,7 +2120,7 @@
             ]
           },
           {
-            "id": "29b62c51-5d3f-4b1f-83be-f70f205776b9",
+            "id": "3c6c6048-65c5-4495-805c-4de103b0c7b8",
             "name": "4.10 [Verificação] Save & test",
             "request": {
               "url": {
@@ -2160,7 +2160,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "253466e4-35bd-44b0-8185-9030f9cff481",
+                  "id": "b8570b37-6946-4241-8295-00c7ca8b4104",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2171,7 +2171,7 @@
             ]
           },
           {
-            "id": "a60a5862-381c-45f8-b8ce-169e44cdb1ba",
+            "id": "2909eb6c-b5fa-4653-a13c-30842cc981ed",
             "name": "4.11 [Verificação] Histórico da estufa no MySQL",
             "request": {
               "description": {
@@ -2228,7 +2228,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e7a8e365-b548-4074-a2f9-ab6612189dc8",
+                  "id": "bd55fb4e-9708-4e34-be89-b68aa457511c",
                   "type": "text/javascript",
                   "exec": [
                     "const r = pm.response.json().results.A;",
@@ -2243,7 +2243,7 @@
             ]
           },
           {
-            "id": "b16e264b-9058-48e1-a4e2-7cc0fe3737f8",
+            "id": "6a9a0b3c-6229-4681-84f4-00727a2db0d6",
             "name": "4.12 [Verificação] Painel \"Estufa inteligente\" existe",
             "request": {
               "url": {
@@ -2289,7 +2289,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "1af8f082-8db6-4374-8bed-f9dde0bc39a6",
+                  "id": "47b3a1e0-b2cb-4d54-8ffb-64e63f004b87",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2302,7 +2302,7 @@
             ]
           },
           {
-            "id": "48f61434-06d7-4713-8e2c-d14b5dc7550a",
+            "id": "d275efd2-bada-42fb-8f0a-183ce44b281d",
             "name": "4.13 [Verificação] Conteúdo do painel",
             "request": {
               "url": {
@@ -2341,7 +2341,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "07da6ebf-ecf9-48af-aec4-a47b41015dcf",
+                  "id": "853af0c7-39cd-4aee-aad5-1e73d659cdad",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
@@ -2458,17 +2458,17 @@
       "name": "CCM520 - Projeto 2 - Estufa na plataforma FIWARE (template)",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "description": {
-        "content": "Projeto 2 - Estufa inteligente na plataforma FIWARE: a estufa no broker público broker.hivemq.com e uma ponte até o Mosquitto local.\n\nSiga o guia passo a passo. Você define a variável `apikey` e escreve o **corpo** de 4 requisições, marcadas com **[Complete o corpo]**: 2.1 (grupo de serviço), 2.2 (dispositivo), 4.1 (subscrição do Cygnus) e 4.4 (notificação para o serviço externo). Todas as outras requisições ([Pronto] e [Verificação]) já estão prontas.\n\nPara entregar: rode a coleção inteira no Runner, com a estufa ligada. A pasta *0* apaga o provisionamento e as subscrições, e as etapas recriam. Para recomeçar TUDO (inclusive histórico e painel): `docker compose down -v` e `docker compose up -d` na pasta `plataforma`.",
+        "content": "Coleção personalizada para a estufa lbgestufa / estufa2604. Os corpos, variáveis do grupo e URLs do ambiente local já estão configurados. Execute as pastas na ordem; a pasta 0 limpa e recria o provisionamento e as subscrições. As variáveis de IDs de subscrição e painel são preenchidas automaticamente pelas requisições correspondentes.",
         "type": "text/plain"
       }
     }
   },
   "environment": {
-    "id": "581e46e5-1e5e-4bd3-aa28-daa15cbe7374",
+    "id": "cc246e62-b8f0-4d1e-98c3-4b741a96cdbf",
     "values": []
   },
   "globals": {
-    "id": "7464f3b5-8e60-470a-a445-3a6999f28694",
+    "id": "92b237fd-3808-4041-abb2-dcf12ad8615c",
     "values": []
   },
   "run": {
@@ -2520,10 +2520,10 @@
       }
     },
     "timings": {
-      "responseAverage": 6.666666666666667,
-      "responseMin": 2,
-      "responseMax": 19,
-      "responseSd": 5.647024782032472,
+      "responseAverage": 8.5,
+      "responseMin": 3,
+      "responseMax": 24,
+      "responseSd": 7.0178344238091,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -2532,8 +2532,8 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1794496924981,
-      "completed": 1794496925546
+      "started": 1794606792386,
+      "completed": 1794606792971
     },
     "executions": [
       {
@@ -2546,11 +2546,11 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "a5d17c38-da44-4ac7-8100-ce0f4d3c945e",
-          "httpRequestId": "bfb2b6c0-99c3-46d5-aaeb-72f6b6972d5d"
+          "ref": "415663e4-650f-4ef0-bcff-36ad038acaf3",
+          "httpRequestId": "445d3595-c66f-438b-8104-fc6f9efd7c72"
         },
         "item": {
-          "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+          "id": "067ebe9b-60aa-4ba2-8f61-b512705c68b6",
           "name": "1.1 [Verificação] Orion no ar",
           "request": {
             "url": {
@@ -2571,13 +2571,13 @@
             {
               "listen": "test",
               "script": {
-                "id": "77123a9e-ff91-47f8-989e-3666b9044415",
+                "id": "5f908590-a94f-47e3-a800-51c4e7f2e7f2",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                   "pm.test(\"Orion 4.5.0\", () => pm.expect(pm.response.json().orion.version).to.eql(\"4.5.0\"));"
                 ],
-                "_lastExecutionId": "ef80d45e-cf01-43f6-b8a4-3101b11a255c"
+                "_lastExecutionId": "105551f0-5a61-4511-8ec5-189b161de652"
               }
             }
           ]
@@ -2613,7 +2613,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "4b4a22a4-feb3-4b49-9113-5ad673a05822",
+              "value": "0ede3ff5-bfb8-4fec-a533-9ced550c31d2",
               "system": true
             },
             {
@@ -2635,17 +2635,17 @@
           "method": "GET"
         },
         "response": {
-          "id": "b23860e9-49b5-410b-9406-a61cb2a7a776",
+          "id": "1d451525-68d2-4f40-8864-3caa4a32797b",
           "status": "OK",
           "code": 200,
           "header": [
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:12 GMT"
             },
             {
               "key": "Fiware-Correlator",
-              "value": "d13048fa-deac-11f1-8103-4e8d72899d9d"
+              "value": "9f44c978-dfac-11f1-8e58-dacb6ca02829"
             },
             {
               "key": "Content-Type",
@@ -2653,7 +2653,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "375"
+              "value": "376"
             }
           ],
           "stream": {
@@ -2720,12 +2720,13 @@
               104,
               44,
               32,
-              55,
+              49,
               32,
               109,
               44,
               32,
-              56,
+              52,
+              54,
               32,
               115,
               34,
@@ -3037,10 +3038,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 19,
-          "responseSize": 375
+          "responseTime": 24,
+          "responseSize": 376
         },
-        "id": "13dd5fef-373a-4184-9509-774242f0ed03",
+        "id": "067ebe9b-60aa-4ba2-8f61-b512705c68b6",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -3054,15 +3055,15 @@
       },
       {
         "cursor": {
-          "ref": "1cf2f8fa-b4c1-40fb-b369-cb0c4b5b4cdb",
+          "ref": "9f330ab3-1fbb-457b-a29f-c57661343e33",
           "length": 6,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "ab611586-8122-45ee-9cd3-674d942b72a9"
+          "httpRequestId": "d904f065-1fdb-423b-9018-c9baeb5e82e4"
         },
         "item": {
-          "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+          "id": "5e82e777-8e9b-4346-998f-95e6a863b1a6",
           "name": "1.2 [Verificação] IoT Agent no ar",
           "request": {
             "url": {
@@ -3084,13 +3085,13 @@
             {
               "listen": "test",
               "script": {
-                "id": "8ddb07a3-7ff9-4dfa-8622-eb14299d6eaf",
+                "id": "dc83a405-3ca5-480a-abe6-9548f380be07",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                   "pm.test(\"IoT Agent JSON 3.14.0\", () => pm.expect(pm.response.json().version).to.eql(\"3.14.0\"));"
                 ],
-                "_lastExecutionId": "2b7d5427-e94e-4fc3-abe9-680f02e3e9a8"
+                "_lastExecutionId": "27227cbd-a774-4955-8801-d5fa1cef6528"
               }
             }
           ]
@@ -3127,7 +3128,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "6d44d000-04e9-4fa4-bbad-7ea2e504b1b4",
+              "value": "856f0f67-a677-43bd-af82-1f56f712235b",
               "system": true
             },
             {
@@ -3149,7 +3150,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "4df80651-d286-4ec0-a172-ddce15f702d4",
+          "id": "6e82fe37-8584-4d75-8a52-4bcfdd46c3da",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3159,7 +3160,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "d2ab46a4-5fd2-414c-a780-7742fd79ed51"
+              "value": "0e8c6686-13d6-4088-a355-5441afdd4f16"
             },
             {
               "key": "Content-Type",
@@ -3175,7 +3176,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:12 GMT"
             },
             {
               "key": "Connection",
@@ -3263,10 +3264,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 4,
+          "responseTime": 6,
           "responseSize": 71
         },
-        "id": "bbc6a6bd-89ea-470f-b3a2-ff6b9e74acde",
+        "id": "5e82e777-8e9b-4346-998f-95e6a863b1a6",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -3280,15 +3281,15 @@
       },
       {
         "cursor": {
-          "ref": "bd3aba16-483a-4060-88ba-e04a86e02a27",
+          "ref": "7440b3af-539d-4943-954c-66cfc8cc2bfb",
           "length": 6,
           "cycles": 1,
           "position": 2,
           "iteration": 0,
-          "httpRequestId": "4497f192-7904-4d90-a83c-68682db530b4"
+          "httpRequestId": "f07559bb-5e5e-4f50-bc07-e0ef29f5ef71"
         },
         "item": {
-          "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+          "id": "86de6eb1-5dba-4ea5-a7d9-d8dd2b8d7633",
           "name": "1.3 [Verificação] Cygnus no ar",
           "request": {
             "url": {
@@ -3310,12 +3311,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "21a7f18e-b4c5-49bf-a6ab-7f6b86c93198",
+                "id": "6d853b1d-66df-45b0-a351-1a842f2ffd2e",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
                 ],
-                "_lastExecutionId": "4dc3004e-45b9-420b-97ad-1c6351a62f1d"
+                "_lastExecutionId": "2cf486a4-1cec-439e-9695-87818b3ac777"
               }
             }
           ]
@@ -3352,7 +3353,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "0d66d5c9-3585-4714-83a7-bcf52d3ab657",
+              "value": "9526f233-5b25-41c1-b1fd-34ab75a0c625",
               "system": true
             },
             {
@@ -3374,7 +3375,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "9892926e-dab3-471c-befe-bf2281434317",
+          "id": "dbbe7bd7-b2f6-42df-b38c-1f16e8db6b2d",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3476,10 +3477,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 5,
+          "responseTime": 6,
           "responseSize": 79
         },
-        "id": "32d4c023-20f9-4946-96f2-69630e3b08c8",
+        "id": "86de6eb1-5dba-4ea5-a7d9-d8dd2b8d7633",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -3489,15 +3490,15 @@
       },
       {
         "cursor": {
-          "ref": "edaa3591-b931-4775-935c-862c146c2e81",
+          "ref": "914a7534-3961-489c-9bb9-4e1e983d6f9a",
           "length": 6,
           "cycles": 1,
           "position": 3,
           "iteration": 0,
-          "httpRequestId": "9453036a-b30e-484f-bdf9-ae0e5b65feb2"
+          "httpRequestId": "56584048-1704-4531-af18-f98652d89a6e"
         },
         "item": {
-          "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+          "id": "f5439de2-6a8f-45b1-b04f-b77c0c5c7e15",
           "name": "1.4 [Verificação] Grafana no ar",
           "request": {
             "url": {
@@ -3519,13 +3520,13 @@
             {
               "listen": "test",
               "script": {
-                "id": "5c7cba76-f256-49ba-9699-29ea78204e20",
+                "id": "f3f94951-0cd9-4d5e-a4bc-659671c4959f",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
                   "pm.test(\"Banco do Grafana ok\", () => pm.expect(pm.response.json().database).to.eql(\"ok\"));"
                 ],
-                "_lastExecutionId": "20689145-7cf5-4f91-9e3a-1f45c0d77c5d"
+                "_lastExecutionId": "9994def6-cc05-46e7-93d9-79158ad48d04"
               }
             }
           ]
@@ -3562,7 +3563,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "58e25b60-8972-4fa3-a175-d52712c382de",
+              "value": "de47c74e-65ca-4412-ad74-46412cd901af",
               "system": true
             },
             {
@@ -3584,7 +3585,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "850a3508-dd99-4582-a81b-4386a5a0fcfc",
+          "id": "758aad18-176a-45dd-abcc-392b4224d6c0",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3618,7 +3619,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:12 GMT"
             },
             {
               "key": "Content-Length",
@@ -3735,7 +3736,7 @@
           "responseTime": 6,
           "responseSize": 101
         },
-        "id": "7ac4a7f1-f8ed-4fe1-993a-91d523810fb4",
+        "id": "f5439de2-6a8f-45b1-b04f-b77c0c5c7e15",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -3749,15 +3750,15 @@
       },
       {
         "cursor": {
-          "ref": "8de7f718-dad1-4c9b-a337-55952f1106cb",
+          "ref": "433696bf-6cfe-4fd0-974f-e407abf27ca0",
           "length": 6,
           "cycles": 1,
           "position": 4,
           "iteration": 0,
-          "httpRequestId": "6350d7c4-be80-45ac-a456-41e4514ca2fc"
+          "httpRequestId": "3f4b1843-9855-4e09-8e39-b7be6607130a"
         },
         "item": {
-          "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+          "id": "6cded702-4393-4ced-abb7-435696ac75e6",
           "name": "1.5 [Verificação] Consumidor no ar",
           "request": {
             "url": {
@@ -3776,12 +3777,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "0d9aaabe-ef86-4cb2-8e16-57241e470b2f",
+                "id": "235e9a99-f718-4d9d-a894-68d01625cad0",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
                 ],
-                "_lastExecutionId": "4188ffc1-6a21-465e-ba6f-3878006aeb73"
+                "_lastExecutionId": "9acbb39d-db28-44e3-95d4-a39cb4bcf12d"
               }
             }
           ]
@@ -3817,7 +3818,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "ba4c8cda-e074-4a53-8bc0-c6a20a9ec46a",
+              "value": "4e595a77-90ef-4add-8495-e4aae65dab49",
               "system": true
             },
             {
@@ -3839,7 +3840,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "b3ebb9e5-a82b-4fc8-9467-2f0023b3b525",
+          "id": "2f8e7fbf-3af1-4c96-8937-89743c09cfc3",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3849,7 +3850,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:12 GMT"
             },
             {
               "key": "Content-Type",
@@ -3916,10 +3917,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 4,
+          "responseTime": 6,
           "responseSize": 50
         },
-        "id": "722bc45e-f9d1-4ceb-84e4-58389cbfacc7",
+        "id": "6cded702-4393-4ced-abb7-435696ac75e6",
         "assertions": [
           {
             "assertion": "Status 200",
@@ -3929,15 +3930,15 @@
       },
       {
         "cursor": {
-          "ref": "2377f94e-eea7-4410-a62a-5265fcee73cc",
+          "ref": "91883923-a567-406e-9927-d6c36d333ab6",
           "length": 6,
           "cycles": 1,
           "position": 5,
           "iteration": 0,
-          "httpRequestId": "4deb0574-62fc-4aa9-b5a2-f4fb0a1ef862"
+          "httpRequestId": "3b3fe03a-ffef-4622-8908-e4b2744e7690"
         },
         "item": {
-          "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+          "id": "a2e5b2b1-69e5-4c20-b04e-d70f6818f3d4",
           "name": "1.6 [Verificação] Variável apikey preenchida",
           "request": {
             "description": {
@@ -3963,14 +3964,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "1d8361b9-c25a-4076-b914-7776f6a14b96",
+                "id": "a7a800ad-d666-4ab4-9fc2-158e5bec44fc",
                 "type": "text/javascript",
                 "exec": [
                   "const k = pm.collectionVariables.get(\"apikey\");",
                   "pm.test(\"apikey com 4 a 24 letras e números\", () => pm.expect(k).to.match(/^[A-Za-z0-9]{4,24}$/));",
                   "pm.test(\"apikey diferente do valor de exemplo\", () => pm.expect(k).to.not.eql(\"troqueesteid\"));"
                 ],
-                "_lastExecutionId": "6f0e0c5f-338a-4c9a-86ea-d02c314f0d83"
+                "_lastExecutionId": "a2c016c9-ba54-4ea1-88ea-12656faa92eb"
               }
             }
           ]
@@ -4011,7 +4012,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "5a7c6fcc-9648-44cf-b9cb-888c1cbdbd24",
+              "value": "4361d76b-fb17-4be5-84fc-f4891a3e3bb7",
               "system": true
             },
             {
@@ -4033,7 +4034,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "b9b87586-ca3b-473c-a059-3fdd46bfabaa",
+          "id": "96ec4578-03be-4f66-89b8-2c15799783db",
           "status": "OK",
           "code": 200,
           "header": [
@@ -4043,7 +4044,7 @@
             },
             {
               "key": "Fiware-Correlator",
-              "value": "b63bb828-2fd0-49d3-b3c6-f722c0837eba"
+              "value": "da79f76e-09ba-45e2-9a6d-254354c1b9cd"
             },
             {
               "key": "Content-Type",
@@ -4059,7 +4060,7 @@
             },
             {
               "key": "Date",
-              "value": "Thu, 12 Nov 2026 15:22:05 GMT"
+              "value": "Fri, 13 Nov 2026 21:53:12 GMT"
             },
             {
               "key": "Connection",
@@ -4147,10 +4148,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 2,
+          "responseTime": 3,
           "responseSize": 71
         },
-        "id": "9dd9a2aa-0382-4af1-ba28-5e78b657242a",
+        "id": "a2e5b2b1-69e5-4c20-b04e-d70f6818f3d4",
         "assertions": [
           {
             "assertion": "apikey com 4 a 24 letras e números",
@@ -4164,7 +4165,7 @@
       }
     ],
     "transfers": {
-      "responseTotal": 777
+      "responseTotal": 778
     },
     "failures": [],
     "error": null
