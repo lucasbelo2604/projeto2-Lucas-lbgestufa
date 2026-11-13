@@ -40,7 +40,7 @@ envio_ativo = True             # comando setSending altera este estado
 
 # Calibracao inicial para a simulacao (ADC de 12 bits: 0 a 4095).
 # Em ambos os sensores, ADC menor corresponde a maior percentual.
-# Registre/verifique essa correspondencia no Wokwi e ajuste em hardware real.
+# Faixas de demonstração verificadas no Wokwi; não são calibração de sensores físicos.
 ADC_SECO_ESCURO = 4095
 ADC_MOLHADO_CLARO = 0
 

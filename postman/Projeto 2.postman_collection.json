@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "1aa9761f-e243-542d-b4a6-694d7c3234c9",
 		"name": "CCM520 - Projeto 2 - Estufa na plataforma FIWARE (template)",
-		"description": "Projeto 2 - Estufa inteligente na plataforma FIWARE: a estufa no broker público broker.hivemq.com e uma ponte até o Mosquitto local.\n\nSiga o guia passo a passo. Você define a variável `apikey` e escreve o **corpo** de 4 requisições, marcadas com **[Complete o corpo]**: 2.1 (grupo de serviço), 2.2 (dispositivo), 4.1 (subscrição do Cygnus) e 4.4 (notificação para o serviço externo). Todas as outras requisições ([Pronto] e [Verificação]) já estão prontas.\n\nPara entregar: rode a coleção inteira no Runner, com a estufa ligada. A pasta *0* apaga o provisionamento e as subscrições, e as etapas recriam. Para recomeçar TUDO (inclusive histórico e painel): `docker compose down -v` e `docker compose up -d` na pasta `plataforma`.",
+		"description": "Coleção personalizada para a estufa lbgestufa / estufa2604. Os corpos, variáveis do grupo e URLs do ambiente local já estão configurados. Execute as pastas na ordem; a pasta 0 limpa e recria o provisionamento e as subscrições. As variáveis de IDs de subscrição e painel são preenchidas automaticamente pelas requisições correspondentes.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -377,7 +377,7 @@
 			"description": "Grupo, dispositivo e o registro que o IoT Agent cria no Orion.",
 			"item": [
 				{
-					"name": "2.1 [Complete o corpo] Grupo de serviço da sua API key",
+					"name": "2.1 Grupo de serviço lbgestufa",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -405,7 +405,7 @@
 								"groups"
 							]
 						},
-						"description": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+						"description": "Crie no IoT Agent o **grupo de configuração** da sua API key (`{{apikey}}`) para entidades do tipo `Greenhouse`, recurso `/iot/json`, apontando para o Orion **visto de dentro da rede Docker**.\n\nVocê está em um broker **público**: medidas de dispositivos que você não provisionou devem ser **rejeitadas**.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"groups\": [\n        {\n            \"apikey\": \"{{apikey}}\",\n            \"cbroker\": \"http://orion:1026\",\n            \"entity_type\": \"Greenhouse\",\n            \"resource\": \"/iot/json\",\n            \"autoprovision\": false\n        }\n    ]\n}",
@@ -440,7 +440,7 @@
 					]
 				},
 				{
-					"name": "2.2 [Complete o corpo] Dispositivo da estufa",
+					"name": "2.2 Dispositivo estufa2604",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -468,7 +468,7 @@
 								"devices"
 							]
 						},
-						"description": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+						"description": "Provisione o dispositivo `{{device_id}}` (transporte MQTT) ligado à entidade `{{entidade}}` do tipo `Greenhouse`, com os **7 atributos** (medidas), os **4 comandos** e os **2 atributos estáticos** da tabela do README (Etapa 2). As chaves curtas (`object_id`) são escolha do grupo, mas precisam ser **as mesmas** do firmware.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"devices\": [\n        {\n            \"device_id\": \"{{device_id}}\",\n            \"apikey\": \"{{apikey}}\",\n            \"entity_name\": \"{{entidade}}\",\n            \"entity_type\": \"Greenhouse\",\n            \"transport\": \"MQTT\",\n            \"timezone\": \"America/Sao_Paulo\",\n            \"attributes\": [\n                {\n                    \"object_id\": \"t\",\n                    \"name\": \"temperature\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"rh\",\n                    \"name\": \"relativeHumidity\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"sm\",\n                    \"name\": \"soilMoisture\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"lx\",\n                    \"name\": \"illuminance\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"r\",\n                    \"name\": \"relayState\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"wa\",\n                    \"name\": \"windowAngle\",\n                    \"type\": \"Number\"\n                },\n                {\n                    \"object_id\": \"si\",\n                    \"name\": \"samplingInterval\",\n                    \"type\": \"Number\"\n                }\n            ],\n            \"commands\": [\n                {\n                    \"name\": \"setRelay\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setServo\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setInterval\",\n                    \"type\": \"command\"\n                },\n                {\n                    \"name\": \"setSending\",\n                    \"type\": \"command\"\n                }\n            ],\n            \"static_attributes\": [\n                {\n                    \"name\": \"name\",\n                    \"type\": \"Text\",\n                    \"value\": \"Estufa LB Gestufa\"\n                },\n                {\n                    \"name\": \"location\",\n                    \"type\": \"geo:json\",\n                    \"value\": {\n                        \"type\": \"Point\",\n                        \"coordinates\": [\n                            0.0,\n                            0.0\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}",
@@ -1500,7 +1500,7 @@
 			"description": "Alerta, Cygnus/MySQL e o painel do Grafana.",
 			"item": [
 				{
-					"name": "4.1 [Complete o corpo] Subscrição do histórico (Cygnus)",
+					"name": "4.1 Subscrição de histórico (Cygnus)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1528,7 +1528,7 @@
 								"subscriptions"
 							]
 						},
-						"description": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+						"description": "Crie a subscrição que envia ao **Cygnus** o histórico da estufa: só entidades `Greenhouse` do seu caminho, apenas os **7 atributos de medida**, no formato que o Cygnus aceita. Lembre-se de **quem** envia a notificação.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"description\": \"Historico da estufa para o Cygnus\",\n    \"subject\": {\n        \"entities\": [\n            {\n                \"id\": \"{{entidade}}\",\n                \"type\": \"Greenhouse\"\n            }\n        ]\n    },\n    \"notification\": {\n        \"http\": {\n            \"url\": \"http://cygnus:5050/notify\"\n        },\n        \"attrs\": [\n            \"temperature\",\n            \"relativeHumidity\",\n            \"soilMoisture\",\n            \"illuminance\",\n            \"relayState\",\n            \"windowAngle\",\n            \"samplingInterval\"\n        ],\n        \"attrsFormat\": \"normalized\"\n    }\n}",
@@ -1642,7 +1642,7 @@
 					]
 				},
 				{
-					"name": "4.4 [Complete o corpo] Notificação de solo seco (serviço externo)",
+					"name": "4.4 Alerta de solo seco (consumidor)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1670,7 +1670,7 @@
 								"subscriptions"
 							]
 						},
-						"description": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\n**Você escreve só o corpo** (aba *Body*, JSON). Método, URL e cabeçalhos já estão prontos: não os altere.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
+						"description": "Crie a subscrição que notifica `http://consumidor:3000/alerta-estufa` quando a **umidade do solo** da estufa ficar **abaixo de 30 %**. A notificação deve ir em `keyValues`, só com a umidade do solo, o estado do relé e o horário da medida. Evite uma notificação a cada medida enquanto o solo estiver seco.\n\nO corpo JSON desta requisição já está preenchido para a estufa lbgestufa / estufa2604. Método, URL e cabeçalhos também estão configurados.\n\n---\n**Critério de aceite:** os testes da aba *Test Results* devem passar.",
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"description\": \"Alerta de solo seco da estufa\",\n    \"subject\": {\n        \"entities\": [\n            {\n                \"id\": \"{{entidade}}\",\n                \"type\": \"Greenhouse\"\n            }\n        ],\n        \"condition\": {\n            \"attrs\": [\n                \"soilMoisture\"\n            ],\n            \"expression\": {\n                \"q\": \"soilMoisture<30\"\n            }\n        }\n    },\n    \"notification\": {\n        \"http\": {\n            \"url\": \"http://consumidor:3000/alerta-estufa\"\n        },\n        \"attrs\": [\n            \"soilMoisture\",\n            \"relayState\",\n            \"TimeInstant\"\n        ],\n        \"attrsFormat\": \"keyValues\"\n    },\n    \"throttling\": 10\n}",

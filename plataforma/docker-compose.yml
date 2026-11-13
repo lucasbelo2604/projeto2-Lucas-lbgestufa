@@ -12,8 +12,8 @@
 #                                                        Cygnus :5050 --> MySQL :3306 --> Grafana :3000
 #                                                                         (histórico)      (painel)
 #
-# Antes de subir: complete os TODO de mosquitto/mosquitto.conf (broker público, client id e tópicos
-# da ponte com a SUA API key). Este arquivo não precisa de alteração.
+# A ponte em mosquitto/mosquitto.conf já está configurada para lbgestufa/estufa2604.
+# Este arquivo Compose usa essa configuração e não precisa de edição para a demonstração.
 #
 # Uso (na pasta deste arquivo):
 #   docker compose pull       -> baixa as imagens (cerca de 4 GB; faça antes da aula)

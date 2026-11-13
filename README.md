@@ -5,7 +5,9 @@
 **Device ID:** `estufa2604`  
 **Entidade NGSI-v2:** `urn:ngsi-ld:Greenhouse:001` (`Greenhouse`)  
 **FIWARE-Service / ServicePath:** `fei` / `/estufa`  
-**Integrantes e RAs:** Lucas Belo Gaspardo 22.224.007-9.
+**Integrante:** Lucas Belo Gaspardo
+
+**RA:** 22.224.007-9
 
 Este README reúne a identificação, arquitetura, instruções de conexão, decisões e respostas R1–R8. O relatório técnico completo também está em `relatorio.pdf`.
 
@@ -39,7 +41,7 @@ projeto2-Lucas-lbgestufa/
 └── relatorio.pdf
 ```
 
-Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman parte do template da aula, personalizado para esta API key, dispositivo, entidade e modelo de dados. O projeto Wokwi configurado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); os arquivos `firmware/main.py` e `firmware/diagram.json` são a cópia correspondente para reprodução local.
+Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman foi personalizada a partir do material-base da aula para esta API key, dispositivo, entidade e modelo de dados. O projeto adaptado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); `firmware/main.py` e `firmware/diagram.json` reproduzem a simulação. O diagrama preserva nos metadados a autoria do projeto Wokwi original, de Jonathan Campo, fornecido como referência.
 
 ## Hardware e firmware
 
@@ -98,7 +100,7 @@ A coleção usa o host local: Orion `1026`, IoT Agent de provisionamento `4041`,
 | `wa` | `windowAngle` | Number, 0–180° |
 | `si` | `samplingInterval` | Number, 2–10 s |
 
-Atributos estáticos: `name` e `location`. O ponto geográfico atualmente usa `[0,0]` como sentinela técnica; substitua pelas coordenadas reais antes de usar/provisionar a localização. Comandos aceitos: `setRelay` (0/1), `setServo` (0–180), `setInterval` (2–10 s) e `setSending` (0/1). O firmware responde `OK` ou `ERRO: motivo` no tópico `cmdexe`. `setSending=0` suspende as medidas periódicas, mas mantém a escuta de comandos ativa.
+Atributos estáticos: `name` e `location`. Nesta entrega simulada, `location` usa `[0,0]` como valor de demonstração e não representa a localização real de uma estufa. Comandos aceitos: `setRelay` (0/1), `setServo` (0–180), `setInterval` (2–10 s) e `setSending` (0/1). O firmware responde `OK` ou `ERRO: motivo` no tópico `cmdexe`. `setSending=0` suspende as medidas periódicas, mas mantém a escuta de comandos ativa.
 
 ## Histórico, alerta e Grafana
 
@@ -128,7 +130,7 @@ Para configurar o Grafana em uma instalação nova: abra `http://localhost:3000`
 
 No ambiente de preparação, os nove serviços ficaram `healthy`; a configuração Compose passou na validação; a ponte MQTT foi testada nos dois sentidos e filtrou outra chave. Grupo/dispositivo receberam HTTP 201 e uma amostra MQTT atualizou Orion. Etapa 1 Postman: 6 requisições e 10 asserções sem falha. Etapa 2: 6 requisições e 31 asserções sem falha. Na Etapa 4, as subscrições foram criadas e, após nova publicação de medidas, as 11 verificações seguintes passaram com 38 asserções: entrega Cygnus, histórico MySQL, alerta, fonte de dados e dashboard. Resultados estão em `postman/resultado-etapa1.json`, `resultado-etapa2.json` e `resultado-etapa4.json`.
 
-A Etapa 3 foi executada no simulador Wokwi e validou o caminho completo para HiveMQ, ponte MQTT, IoT Agent e Orion, além dos quatro comandos e seus limites. Essa evidência cobre a simulação; não substitui a calibração dos sensores nem a validação elétrica em uma ESP32 física. Ainda faltam calibrações reais do Projeto 1, coordenadas da estufa e nomes/RAs dos integrantes, que devem ser preenchidos pelo grupo.
+A Etapa 3 foi executada somente no simulador Wokwi e validou o caminho para HiveMQ, ponte MQTT, IoT Agent e Orion, além dos quatro comandos e seus limites. Não houve teste em placa física. Para manter o escopo reproduzível no simulador, `location` e as faixas ADC têm valores de demonstração; eles não afirmam uma localização nem calibração de sensores físicos.
 
 ## Organização do projeto
 
