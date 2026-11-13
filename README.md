@@ -41,7 +41,7 @@ projeto2-Lucas-lbgestufa/
 └── relatorio.pdf
 ```
 
-Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman foi personalizada a partir do material-base da aula para esta API key, dispositivo, entidade e modelo de dados. O projeto adaptado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); `firmware/main.py` e `firmware/diagram.json` reproduzem a simulação. O circuito foi reorganizado e ganhou um indicador local de solo seco. Como ponto de partida, foi usado o [projeto Wokwi compartilhado de Jonathan Campo](https://wokwi.com/projects/480422279547961345), com autorização de adaptação informada pelo responsável por esta entrega; a autoria original permanece registrada no diagrama e as alterações desta versão são descritas neste README.
+Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman foi personalizada a partir do material-base da aula para esta API key, dispositivo, entidade e modelo de dados. O projeto adaptado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); `firmware/main.py` e `firmware/diagram.json` reproduzem a simulação. O circuito foi reorganizado e ganhou um indicador local de solo seco. Como ponto de partida, foi usado o [projeto Wokwi compartilhado de Jonathan Campo](https://wokwi.com/projects/480422279547961345); a autoria original permanece registrada no diagrama e as alterações desta versão são descritas neste README.
 
 ## Hardware e firmware
 
