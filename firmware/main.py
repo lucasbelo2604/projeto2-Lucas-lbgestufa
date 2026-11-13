@@ -2,9 +2,7 @@
 CCM520 - Projeto 2: Estufa inteligente integrada ao FIWARE.
 ESP32 / MicroPython / Wokwi / MQTT / IoT Agent JSON.
 
-Pinos mantidos do Projeto 1:
-  DHT22: GPIO4 | Solo: GPIO34 | LDR: GPIO35
-  Rele: GPIO26 | Servomotor: GPIO27
+Pinagem desta montagem: DHT22=19, solo=32, LDR=33, rele=25, servo=18, LED alerta=23.
 """
 
 import dht
@@ -33,6 +31,14 @@ TOPICO_MEDIDAS = "/json/" + API_KEY + "/" + DEVICE_ID + "/attrs"
 TOPICO_COMANDOS = "/" + API_KEY + "/" + DEVICE_ID + "/cmd"
 TOPICO_RESULTADO = "/json/" + API_KEY + "/" + DEVICE_ID + "/cmdexe"
 
+PIN_DHT = 19
+PIN_SOLO = 32       # ADC1_CH4
+PIN_LUZ = 33        # ADC1_CH5
+PIN_RELE = 25
+PIN_SERVO = 18
+PIN_LED_SOLO_SECO = 23
+LIMIAR_SOLO_SECO = 30
+
 INTERVALO_MIN = 2000           # ms
 INTERVALO_MAX = 10000          # ms
 intervalo = 2000               # ms; comando setInterval altera este valor
@@ -48,19 +54,21 @@ ADC_MOLHADO_CLARO = 0
 # ---------------------------------------------------------------------------
 # 2. Hardware
 # ---------------------------------------------------------------------------
-sensor_umidade_solo = ADC(Pin(34))
+sensor_umidade_solo = ADC(Pin(PIN_SOLO))
 sensor_umidade_solo.atten(ADC.ATTN_11DB)
 
-sensor_luz = ADC(Pin(35))
+sensor_luz = ADC(Pin(PIN_LUZ))
 sensor_luz.atten(ADC.ATTN_11DB)
 
-sensor_dht22 = dht.DHT22(Pin(4))
+sensor_dht22 = dht.DHT22(Pin(PIN_DHT))
 
-rele = Pin(26, Pin.OUT)
+rele = Pin(PIN_RELE, Pin.OUT)
 rele.value(0)
 
-servomotor = PWM(Pin(27), freq=50)
+servomotor = PWM(Pin(PIN_SERVO), freq=50)
 angulo_servo = 0
+led_solo_seco = Pin(PIN_LED_SOLO_SECO, Pin.OUT)
+led_solo_seco.value(0)
 
 
 def mover_servo(angulo):
@@ -126,6 +134,7 @@ def publicar_medidas():
     if dados is None:
         return False
 
+    led_solo_seco.value(1 if dados["sm"] < LIMIAR_SOLO_SECO else 0)
     dados["r"] = rele.value()       # relayState: 0 ou 1
     dados["wa"] = angulo_servo       # windowAngle: 0 a 180
     dados["si"] = intervalo // 1000  # samplingInterval: segundos

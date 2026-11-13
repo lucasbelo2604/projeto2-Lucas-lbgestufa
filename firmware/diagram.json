@@ -1,45 +1,197 @@
 {
   "version": 1,
-  "author": "Jonathan Campo",
+  "author": "Lucas Belo Gaspardo (adaptação de Jonathan Campo)",
   "editor": "wokwi",
   "parts": [
     {
       "type": "board-esp32-devkit-c-v4",
       "id": "esp",
-      "top": 0,
-      "left": -4.76,
-      "attrs": { "env": "micropython-20260406-v1.28.0" }
+      "top": 20,
+      "left": 0,
+      "attrs": {
+        "env": "micropython-20260406-v1.28.0"
+      }
     },
-    { "type": "wokwi-dht22", "id": "dht1", "top": -76.5, "left": 205.8, "attrs": {} },
-    { "type": "wokwi-relay-module", "id": "relay1", "top": 201.8, "left": 153.6, "attrs": {} },
-    { "type": "wokwi-servo", "id": "servo1", "top": -126.8, "left": -9.6, "attrs": {} },
     {
-      "type": "wokwi-photoresistor-sensor",
-      "id": "ldr1",
-      "top": 195.2,
-      "left": -316,
+      "type": "wokwi-dht22",
+      "id": "dht_estufa",
+      "top": -90,
+      "left": 230,
       "attrs": {}
     },
-    { "type": "wokwi-potentiometer", "id": "pot_solo", "top": -10.9, "left": -173, "attrs": {} }
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr_luz",
+      "top": -130,
+      "left": -270,
+      "attrs": {
+        "lux": "500"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot_solo",
+      "top": 130,
+      "left": -250,
+      "attrs": {
+        "value": "700"
+      }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "rele_bomba",
+      "top": 190,
+      "left": 210,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_ventilacao",
+      "top": -190,
+      "left": 70,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_alerta",
+      "top": 255,
+      "left": -20,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_solo_seco",
+      "top": 255,
+      "left": 55,
+      "attrs": {
+        "color": "red",
+        "label": "Solo seco"
+      }
+    }
   ],
   "connections": [
-    [ "esp:TX", "$serialMonitor:RX", "", [] ],
-    [ "esp:RX", "$serialMonitor:TX", "", [] ],
-    [ "esp:3V3.1", "dht1:VCC", "red", [ "v-30", "h-120" ] ],
-    [ "esp:4", "dht1:SDA", "blue", [ "h225.54" ] ],
-    [ "esp:3V3.1", "ldr1:VCC", "red", [ "v40", "h-140" ] ],
-    [ "esp:GND.1", "ldr1:GND", "black", [ "h-119.81", "v67.2", "h-28.8" ] ],
-    [ "esp:35", "ldr1:AO", "orange", [ "h-100.61", "v60", "v103.9" ] ],
-    [ "esp:3V3.1", "pot_solo:VCC", "red", [ "v-10", "h-180" ] ],
-    [ "esp:GND.1", "pot_solo:GND", "black", [ "h-119.81", "v10", "h-134.4" ] ],
-    [ "esp:34", "pot_solo:SIG", "green", [ "h-33.41", "v38.4", "h-210.8" ] ],
-    [ "esp:5V", "relay1:VCC", "red", [ "h-4.61", "v48" ] ],
-    [ "esp:GND.2", "relay1:GND", "black", [ "h24.04", "v40", "v190.8" ] ],
-    [ "esp:26", "relay1:IN", "purple", [ "h-23.81", "v50", "v103.8" ] ],
-    [ "esp:5V", "servo1:V+", "red", [ "h-71.81", "v-30", "v-277.3" ] ],
-    [ "esp:GND.2", "servo1:GND", "black", [ "h24.04", "v-48", "h-153.6", "v-57.6" ] ],
-    [ "esp:27", "servo1:PWM", "magenta", [ "h-52.61", "v-40", "v-181" ] ],
-    [ "dht1:GND", "esp:GND.2", "black", [ "v19.2", "h-124.8", "v-28.8" ] ]
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:3V3.1",
+      "dht_estufa:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:19",
+      "dht_estufa:SDA",
+      "blue",
+      []
+    ],
+    [
+      "dht_estufa:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:3V3.1",
+      "ldr_luz:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "ldr_luz:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:33",
+      "ldr_luz:AO",
+      "orange",
+      []
+    ],
+    [
+      "esp:3V3.1",
+      "pot_solo:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "pot_solo:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:32",
+      "pot_solo:SIG",
+      "green",
+      []
+    ],
+    [
+      "esp:5V",
+      "rele_bomba:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.2",
+      "rele_bomba:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:25",
+      "rele_bomba:IN",
+      "purple",
+      []
+    ],
+    [
+      "esp:5V",
+      "servo_ventilacao:V+",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.2",
+      "servo_ventilacao:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:18",
+      "servo_ventilacao:PWM",
+      "magenta",
+      []
+    ],
+    [
+      "esp:23",
+      "r_alerta:1",
+      "orange",
+      []
+    ],
+    [
+      "r_alerta:2",
+      "led_solo_seco:A",
+      "orange",
+      []
+    ],
+    [
+      "led_solo_seco:C",
+      "esp:GND.2",
+      "black",
+      []
+    ]
   ],
   "dependencies": {}
 }

@@ -41,19 +41,20 @@ projeto2-Lucas-lbgestufa/
 └── relatorio.pdf
 ```
 
-Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman foi personalizada a partir do material-base da aula para esta API key, dispositivo, entidade e modelo de dados. O projeto adaptado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); `firmware/main.py` e `firmware/diagram.json` reproduzem a simulação. O diagrama preserva nos metadados a autoria do projeto Wokwi original, de Jonathan Campo, fornecido como referência.
+Os JSONs `postman/resultado-etapa*.json` são evidências das execuções concluídas. A coleção Postman foi personalizada a partir do material-base da aula para esta API key, dispositivo, entidade e modelo de dados. O projeto adaptado está em [Estufa Inteligente - Lucas - Projeto 2](https://wokwi.com/projects/480526241555040257); `firmware/main.py` e `firmware/diagram.json` reproduzem a simulação. O circuito foi reorganizado e ganhou um indicador local de solo seco. Como ponto de partida, foi usado o [projeto Wokwi compartilhado de Jonathan Campo](https://wokwi.com/projects/480422279547961345), com autorização de adaptação informada pelo responsável por esta entrega; a autoria original permanece registrada no diagrama e as alterações desta versão são descritas neste README.
 
 ## Hardware e firmware
 
 | Componente | GPIO | Uso |
 |---|---:|---|
-| DHT22 | 4 | temperatura e umidade relativa |
-| Sensor capacitivo de solo | 34 | ADC1, umidade do solo |
-| LDR | 35 | ADC1, luminosidade |
-| Relé | 26 | ligar/desligar |
-| Servo da janela | 27 | posição de 0 a 180° |
+| DHT22 | 19 | temperatura e umidade relativa |
+| Potenciômetro (representa o sensor de solo no Wokwi) | 32 | ADC1_CH4, umidade do solo |
+| LDR | 33 | ADC1_CH5, luminosidade |
+| Relé | 25 | ligar/desligar |
+| Servo da ventilação | 18 | posição de 0 a 180° |
+| LED vermelho + resistor 220 Ω | 23 | alerta local quando solo < 30% |
 
-O firmware entregue é a versão executada no projeto Wokwi vinculado acima. Ele usa `Wokwi-GUEST` sem senha e conecta a `broker.hivemq.com:1883`. Em uma placa física, altere `SSID` e `SENHA` para a rede local e copie `firmware/main.py` como `main.py`; não grave senha pessoal no repositório. `firmware/diagram.json` registra as peças e ligações da simulação Wokwi.
+O firmware entregue é a versão executada no projeto Wokwi vinculado acima. Ele usa `Wokwi-GUEST` sem senha e conecta a `broker.hivemq.com:1883`. Em uma placa física, altere `SSID` e `SENHA` para a rede local e copie `firmware/main.py` como `main.py`; não grave senha pessoal no repositório. `firmware/diagram.json` registra as peças e ligações da simulação Wokwi. A pinagem foi reorganizada para usar GPIO32/33 nos dois canais ADC1 e separar a leitura do sensor dos pinos de atuação. Um LED vermelho com resistor de 220 Ω acende localmente quando a umidade simulada do solo fica abaixo de 30%; ele não altera o modelo NGSI.
 
 O firmware Wokwi usa faixa ADC provisória de 12 bits, mapeada para percentuais. Isso reproduz a direção observada no simulador; não representa calibração medida do sensor físico. Recalibre no circuito real antes de apresentar os percentuais como medição física. Não há senha Wi-Fi pessoal no pacote.
 
